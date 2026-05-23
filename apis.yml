@@ -1,0 +1,146 @@
+aid: mem0
+name: Mem0
+description: >-
+  Mem0 is a memory infrastructure layer that gives AI agents and applications
+  persistent context across sessions. The platform automatically condenses chat
+  history into compact memories that reduce tokens and latency while preserving
+  the right context for retrieval. Mem0 offers both a managed cloud platform
+  and a permissively licensed open source project, with multi-tenant
+  organizations, projects, users, and webhooks. It integrates with most
+  popular agent frameworks including LangChain, LangGraph, CrewAI, AutoGen,
+  LlamaIndex, the OpenAI Agents SDK, and the Vercel AI SDK. Enterprise
+  features cover SOC 2, HIPAA, BYOK, auditable logging, and observability for
+  production agent deployments.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Memory
+  - AI Agents
+  - Agent Memory
+  - Context
+  - LLMs
+  - Retrieval
+  - Vector
+  - LangChain
+  - CrewAI
+  - AutoGen
+  - LlamaIndex
+  - Open Source
+  - Infrastructure
+url: https://raw.githubusercontent.com/api-evangelist/mem0/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: mem0:platform-api
+    name: Mem0 Platform API
+    description: >-
+      The Mem0 Platform API provides hosted memory services for AI agents,
+      exposing endpoints for adding, searching, retrieving, updating, and
+      deleting memories, plus entities, events, organizations, projects, and
+      webhooks. The API is REST based and authenticated with a project API key.
+    humanURL: https://docs.mem0.ai/api-reference
+    baseURL: https://api.mem0.ai
+    tags:
+      - Memory
+      - Agent Memory
+      - Search
+      - Webhooks
+      - Multi-Tenant
+      - REST
+    properties:
+      - type: Documentation
+        url: https://docs.mem0.ai
+      - type: GettingStarted
+        url: https://docs.mem0.ai/quickstart
+      - type: SignUp
+        url: https://app.mem0.ai
+      - type: APIReference
+        url: https://docs.mem0.ai/api-reference
+      - type: SDK
+        url: https://github.com/mem0ai/mem0-python
+      - type: SDK
+        url: https://github.com/mem0ai/mem0-js
+      - type: GitHubRepository
+        url: https://github.com/mem0ai/mem0
+      - type: Pricing
+        url: https://mem0.ai/pricing
+      - type: Authentication
+        url: https://docs.mem0.ai/platform/quickstart
+    features:
+      - name: Add Memories
+        description: Store conversation turns and structured context as memories tied to users or agents.
+      - name: Semantic Search
+        description: Retrieve relevant memories with vector and hybrid search across users, agents, and runs.
+      - name: Memory Lifecycle
+        description: Get, update, and delete memories individually or in batches.
+      - name: Entities
+        description: Manage users and agents as first class entities with their own memory scopes.
+      - name: Organizations and Projects
+        description: Multi-tenant organization, project, and member management for teams and enterprises.
+      - name: Events
+        description: Monitor asynchronous operations such as memory ingestion and processing.
+      - name: Webhooks
+        description: Subscribe to memory and entity events for real-time downstream processing.
+      - name: Graph Memory
+        description: Optional graph-based memory representation for richer relationship modeling.
+      - name: BYOK and Self-Hosted
+        description: Bring your own keys for LLMs and vector stores, or self host with the open source build.
+    useCases:
+      - name: Personalized Assistants
+        description: Give chat assistants long-term memory of user preferences, history, and context.
+      - name: Customer Support Agents
+        description: Remember prior tickets, accounts, and product context across support sessions.
+      - name: Sales and CRM Agents
+        description: Persist account context, deal stage, and conversation history across reps and channels.
+      - name: Healthcare Assistants
+        description: Maintain HIPAA-compliant patient context for clinical and admin workflows.
+      - name: Education Tutors
+        description: Track learner progress, gaps, and preferences across lessons and sessions.
+      - name: Coding Agents
+        description: Remember repo conventions, prior fixes, and developer preferences across sessions.
+    integrations:
+      - name: LangChain
+      - name: LangGraph
+      - name: CrewAI
+      - name: AutoGen
+      - name: LlamaIndex
+      - name: OpenAI Agents SDK
+      - name: Google ADK
+      - name: AWS Bedrock
+      - name: Vercel AI SDK
+      - name: LiveKit
+      - name: ElevenLabs
+      - name: Pipecat
+      - name: Flowise
+      - name: Dify
+      - name: Mastra
+    authentication:
+      - type: API Key
+        description: Authenticate with a project API key in the Authorization header (Token scheme).
+common:
+  - type: Website
+    url: https://mem0.ai
+  - type: Documentation
+    url: https://docs.mem0.ai
+  - type: Blog
+    url: https://mem0.ai/blog
+  - type: GitHubOrganization
+    url: https://github.com/mem0ai
+  - type: Pricing
+    url: https://mem0.ai/pricing
+  - type: TermsOfService
+    url: https://mem0.ai/terms
+  - type: PrivacyPolicy
+    url: https://mem0.ai/privacy
+  - type: Discord
+    url: https://mem0.dev/DiD
+  - type: X
+    url: https://x.com/mem0ai
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/mem0
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
