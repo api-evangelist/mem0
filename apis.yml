@@ -141,6 +141,8 @@ common:
     url: https://x.com/mem0ai
   - type: LinkedIn
     url: https://www.linkedin.com/company/mem0
+  - type: LLMsTxt
+    url: https://docs.mem0.ai/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
