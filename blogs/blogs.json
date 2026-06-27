@@ -2,14 +2,13 @@
   "repo": "mem0",
   "feeds": [
     {
-      "source": "https://mem0.ai/blog/",
-      "error": "HTTPError"
-    },
-    {
-      "source": "https://docs.mem0.ai",
-      "error": "HTTPError"
+      "source": "https://mem0.ai/blog",
+      "feed_url": "",
+      "saved": 3,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 9,
+  "fetched": "2026-06-27T12:53:24Z",
+  "agent_pulled": "2026-06-27"
 }

@@ -55,13 +55,13 @@ apis:
         url: https://docs.mem0.ai
       - type: GettingStarted
         url: https://docs.mem0.ai/quickstart
-      - type: SignUp
+      - type: Signup
         url: https://app.mem0.ai
       - type: APIReference
         url: https://docs.mem0.ai/api-reference
-      - type: SDK
+      - type: SDKs
         url: https://github.com/mem0ai/mem0-python
-      - type: SDK
+      - type: SDKs
         url: https://github.com/mem0ai/mem0-js
       - type: GitHubRepository
         url: https://github.com/mem0ai/mem0
@@ -141,7 +141,7 @@ common:
     url: https://x.com/mem0ai
   - type: LinkedIn
     url: https://www.linkedin.com/company/mem0
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.mem0.ai/llms.txt
 maintainers:
   - FN: Kin Lane
