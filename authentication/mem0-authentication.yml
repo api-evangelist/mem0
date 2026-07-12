@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/mem0-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token
+    your_api_key'''
+  sources:
+  - openapi/mem0-openapi.json
