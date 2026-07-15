@@ -121,6 +121,8 @@ apis:
       - type: API Key
         description: Authenticate with a project API key in the Authorization header (Token scheme).
 common:
+  - type: AgenticAccess
+    url: agentic-access/mem0-agentic-access.yml
   - type: DomainSecurity
     url: security/mem0-domain-security.yml
   - type: Authentication
