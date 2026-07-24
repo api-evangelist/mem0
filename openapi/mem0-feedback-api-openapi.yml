@@ -1,0 +1,103 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents feedback API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: feedback
+paths:
+  /v1/feedback/:
+    post:
+      tags:
+      - feedback
+      description: Submit feedback for a memory.
+      operationId: submit_feedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - memory_id
+              type: object
+              properties:
+                memory_id:
+                  type: string
+                  description: ID of the memory to provide feedback for
+                feedback:
+                  type: string
+                  enum:
+                  - POSITIVE
+                  - NEGATIVE
+                  - VERY_NEGATIVE
+                  nullable: true
+                  description: Type of feedback
+                feedback_reason:
+                  type: string
+                  nullable: true
+                  description: Reason for the feedback
+        required: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    description: Feedback ID
+                  feedback:
+                    type: string
+                    enum:
+                    - POSITIVE
+                    - NEGATIVE
+                    - VERY_NEGATIVE
+                    nullable: true
+                    description: Type of feedback
+                  feedback_reason:
+                    type: string
+                    nullable: true
+                    description: Reason for the feedback
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+      x-code-samples:
+      - lang: Python
+        source: '# To use the Python SDK, install the package:
+
+          # pip install mem0ai
+
+
+          from mem0 import MemoryClient
+
+          client = MemoryClient(api_key="your_api_key")
+
+
+          # Submit feedback for a memory
+
+          feedback = client.feedback(memory_id="memory_id", feedback="POSITIVE")
+
+          print(feedback)'
+      - lang: JavaScript
+        source: "// To use the JavaScript SDK, install the package:\n// npm install mem0ai\n\nimport MemoryClient from 'mem0ai';\n\nconst client = new MemoryClient({ apiKey: 'your-api-key'});\n\nclient.feedback({\n    memory_id: \"your-memory-id\", \n    feedback: \"NEGATIVE\", \n    feedback_reason: \"I don't like this memory because it is not relevant.\"\n})"
+      - lang: cURL
+        source: "curl --request POST \\\n  --url https://api.mem0.ai/v1/feedback/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\"memory_id\": \"memory_id\", \"feedback\": \"POSITIVE\"}'"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'

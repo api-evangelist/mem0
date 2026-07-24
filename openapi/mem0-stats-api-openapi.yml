@@ -1,0 +1,41 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents stats API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: stats
+paths:
+  /v1/stats/:
+    get:
+      tags:
+      - stats
+      summary: Retrieve memory-related statistics for the authenticated user.
+      description: 'This endpoint returns the following statistics:
+
+        - Total number of memories created
+
+        - Total number of search events
+
+        - Total number of add events'
+      operationId: stats_list
+      responses:
+        '200':
+          description: Successfully retrieved statistics.
+          content: {}
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'

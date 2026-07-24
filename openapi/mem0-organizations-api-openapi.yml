@@ -1,0 +1,618 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents organizations API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: organizations
+paths:
+  /api/v1/orgs/organizations/:
+    get:
+      tags:
+      - organizations
+      operationId: organizations_read
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique identifier for the organization.
+                    org_id:
+                      type: string
+                      description: Organization's unique string identifier.
+                    name:
+                      type: string
+                      description: Name of the organization.
+                    description:
+                      type: string
+                      description: Brief description of the organization
+                    address:
+                      type: string
+                      description: Physical address of the organization
+                    contact_email:
+                      type: string
+                      description: Primary contact email for the organization
+                    phone_number:
+                      type: string
+                      description: Contact phone number for the organization
+                    website:
+                      type: string
+                      description: Official website URL of the organization
+                    on_paid_plan:
+                      type: boolean
+                      description: Indicates whether the organization is on a paid plan
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp of when the organization was created.
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp of when the organization was last updated.
+                    owner:
+                      type: integer
+                      description: Identifier of the organization's owner
+                    members:
+                      type: array
+                      items:
+                        type: integer
+                      description: List of member identifiers belonging to the organization.
+      x-code-samples:
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://api.mem0.ai/api/v1/orgs/organizations/"
+
+
+          headers = {"Authorization": "Token <api-key>"}
+
+
+          response = requests.request("GET", url, headers=headers)
+
+
+          print(response.text)'
+      - lang: JavaScript
+        source: "const options = {method: 'GET', headers: {Authorization: 'Token <api-key>'}};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request GET \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+    post:
+      tags:
+      - organizations
+      description: Create a new organization.
+      operationId: create_organization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the new organization.
+              required:
+              - name
+      responses:
+        '201':
+          description: Successfully created a new organization.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization created successfully.
+                  org_id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier for the organization.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    description: Errors found in the payload.
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+      x-code-samples:
+      - lang: Python
+        source: "import requests\n\nurl = \"https://api.mem0.ai/api/v1/orgs/organizations/\"\n\npayload = {\"name\": \"<string>\"}\nheaders = {\n    \"Authorization\": \"Token <api-key>\",\n    \"Content-Type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+      - lang: JavaScript
+        source: "const options = {\n  method: 'POST',\n  headers: {Authorization: 'Token <api-key>', 'Content-Type': 'application/json'},\n  body: '{\"name\":\"<string>\"}'\n};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request POST \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"name\": \"<string>\"\n}'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/\"\n\n\tpayload := strings.NewReader(\"{\n  \\\"name\\\": \\\"<string>\\\"\n}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"POST\",\n  CURLOPT_POSTFIELDS => \"{\n  \\\"name\\\": \\\"<string>\\\"\n}\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+  /api/v1/orgs/organizations/{org_id}/:
+    get:
+      tags:
+      - organizations
+      description: Get a organization.
+      operationId: get_organization
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: The unique identifier of the organization
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the organization.
+                  org_id:
+                    type: string
+                    description: Unique organization ID
+                  name:
+                    type: string
+                    description: Name of the organization.
+                  description:
+                    type: string
+                    description: Description of the organization
+                  address:
+                    type: string
+                    description: Address of the organization
+                  contact_email:
+                    type: string
+                    format: email
+                    description: Contact email for the organization
+                  phone_number:
+                    type: string
+                    description: Phone number of the organization
+                  website:
+                    type: string
+                    format: uri
+                    description: Website of the organization
+                  on_paid_plan:
+                    type: boolean
+                    description: Indicates if the organization is on a paid plan
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp of when the organization was created.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp of when the organization was last updated.
+                  owner:
+                    type: integer
+                    description: Identifier of the organization's owner
+                  members:
+                    type: array
+                    items:
+                      type: integer
+                    description: List of member identifiers belonging to the organization.
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/"
+
+
+          headers = {"Authorization": "Token <api-key>"}
+
+
+          response = requests.request("GET", url, headers=headers)
+
+
+          print(response.text)'
+      - lang: JavaScript
+        source: "const options = {method: 'GET', headers: {Authorization: 'Token <api-key>'}};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request GET \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/api/v1/orgs/organizations/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\\n  \\\"name\\\": \\\"<string>\\\"\\n}\")\n  .asString();"
+    delete:
+      tags:
+      - organizations
+      summary: Delete an organization
+      description: Delete an organization by its ID.
+      operationId: delete_organization
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: Unique identifier of the organization to delete.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Organization deleted successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization deleted successfully!
+        '403':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/"
+
+
+          headers = {"Authorization": "Token <api-key>"}
+
+
+          response = requests.request("DELETE", url, headers=headers)
+
+
+          print(response.text)'
+      - lang: JavaScript
+        source: "const options = {method: 'DELETE', headers: {Authorization: 'Token <api-key>'}};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request DELETE \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"DELETE\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+  /api/v1/orgs/organizations/{org_id}/members/:
+    get:
+      tags:
+      - organizations
+      summary: Get organization members
+      description: Retrieve a list of members for a specific organization.
+      operationId: get_organization_members
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: Unique identifier of the organization.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user_id:
+                          type: string
+                          description: Unique identifier of the member.
+                        role:
+                          type: string
+                          description: Role of the member in the organization.
+                    description: List of members belonging to the organization.
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/"
+
+
+          headers = {"Authorization": "Token <api-key>"}
+
+
+          response = requests.request("GET", url, headers=headers)
+
+
+          print(response.text)'
+      - lang: JavaScript
+        source: "const options = {method: 'GET', headers: {Authorization: 'Token <api-key>'}};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request GET \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+    put:
+      tags:
+      - organizations
+      summary: Update organization member role
+      description: Update the role of an existing member in a specific organization.
+      operationId: update_organization_member_role
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: Unique identifier of the organization.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - role
+              properties:
+                email:
+                  type: string
+                  description: Email of the member whose role is to be updated.
+                role:
+                  type: string
+                  description: New role of the member in the organization
+      responses:
+        '200':
+          description: User role updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User role updated successfully
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    description: Errors found in the payload.
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: "import requests\n\nurl = \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\npayload = {\n    \"email\": \"<string>\",\n    \"role\": \"<string>\"\n}\nheaders = {\n    \"Authorization\": \"Token <api-key>\",\n    \"Content-Type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+      - lang: JavaScript
+        source: "const options = {\n  method: 'PUT',\n  headers: {Authorization: 'Token <api-key>', 'Content-Type': 'application/json'},\n  body: '{\"email\":\"<string>\",\"role\":\"<string>\"}'\n};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request PUT \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"email\": \"<string>\",\n  \"role\": \"<string>\"\n}'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\n\tpayload := strings.NewReader(\"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\")\n\n\treq, _ := http.NewRequest(\"PUT\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"PUT\",\n  CURLOPT_POSTFIELDS => \"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.put(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\")\n  .asString();"
+    post:
+      tags:
+      - organizations
+      summary: Add organization member
+      description: Add a new member to a specific organization.
+      operationId: add_organization_member
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: Unique identifier of the organization.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - role
+              properties:
+                email:
+                  type: string
+                  description: Email of the member to be added.
+                role:
+                  type: string
+                  description: Role of the member in the organization.
+      responses:
+        '201':
+          description: Member added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User added to the organization.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    description: Errors found in the payload.
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: "import requests\n\nurl = \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\npayload = {\n    \"email\": \"<string>\",\n    \"role\": \"<string>\"\n}\nheaders = {\n    \"Authorization\": \"Token <api-key>\",\n    \"Content-Type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+      - lang: JavaScript
+        source: "const options = {\n  method: 'POST',\n  headers: {Authorization: 'Token <api-key>', 'Content-Type': 'application/json'},\n  body: '{\"email\":\"<string>\",\"role\":\"<string>\"}'\n};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request POST \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"email\": \"<string>\",\n  \"role\": \"<string>\"\n}'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\n\tpayload := strings.NewReader(\"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"POST\",\n  CURLOPT_POSTFIELDS => \"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+    delete:
+      tags:
+      - organizations
+      summary: Remove a member from the organization
+      operationId: remove_organization_member
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        description: Unique identifier of the organization.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  description: Email of the member to be removed.
+      responses:
+        '200':
+          description: Member removed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User removed from organization.
+        '404':
+          description: Organization not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Organization not found
+      x-code-samples:
+      - lang: Python
+        source: "import requests\n\nurl = \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\npayload = {\"email\": \"<string>\"}\nheaders = {\n    \"Authorization\": \"Token <api-key>\",\n    \"Content-Type\": \"application/json\"\n}\n\nresponse = requests.request(\"DELETE\", url, json=payload, headers=headers)\n\nprint(response.text)"
+      - lang: JavaScript
+        source: "const options = {\n  method: 'DELETE',\n  headers: {Authorization: 'Token <api-key>', 'Content-Type': 'application/json'},\n  body: '{\"email\":\"<string>\"}'\n};\n\nfetch('https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request DELETE \\\n  --url https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"email\": \"<string>\"\n}'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\"\n\n\tpayload := strings.NewReader(\"{\n  \\\"email\\\": \\\"<string>\\\"\n}\")\n\n\treq, _ := http.NewRequest(\"DELETE\", url, payload)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"DELETE\",\n  CURLOPT_POSTFIELDS => \"{\n  \\\"email\\\": \\\"<string>\\\"\n}\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"email\\\": \\\"<string>\\\"\n}\")\n  .asString();"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'

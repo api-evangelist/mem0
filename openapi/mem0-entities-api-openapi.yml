@@ -1,0 +1,220 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents entities API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: entities
+paths:
+  /v1/entities/:
+    get:
+      tags:
+      - entities
+      operationId: entities_list
+      parameters:
+      - name: org_id
+        in: query
+        schema:
+          type: string
+        description: Filter entities by organization ID.
+      - name: project_id
+        in: query
+        schema:
+          type: string
+        description: Filter entities by project ID.
+      responses:
+        '200':
+          description: Successfully retrieved list of entities.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier for the entity.
+                    name:
+                      type: string
+                      description: Name of the entity.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp of when the entity was created.
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp of when the entity was last updated.
+                    total_memories:
+                      type: integer
+                      description: Total number of memories associated with the entity.
+                    owner:
+                      type: string
+                      description: Owner of the entity.
+                    organization:
+                      type: string
+                      description: Organization the entity belongs to.
+                    metadata:
+                      type: object
+                      description: Additional metadata associated with the entity
+                    type:
+                      type: string
+                      enum:
+                      - user
+                      - agent
+                      - app
+                      - run
+                  required:
+                  - id
+                  - name
+                  - created_at
+                  - updated_at
+                  - total_memories
+                  - owner
+                  - organization
+                  - type
+      x-code-samples:
+      - lang: Python
+        source: '# To use the Python SDK, install the package:
+
+          # pip install mem0ai
+
+
+          from mem0 import MemoryClient
+
+          client = MemoryClient(api_key="your_api_key")
+
+          users = client.users()
+
+          print(users)'
+      - lang: JavaScript
+        source: "// To use the JavaScript SDK, install the package:\n// npm i mem0ai\n\nimport MemoryClient from 'mem0ai';\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\n// Retrieve all users\nclient.users()\n  .then(result => console.log(result))\n  .catch(error => console.error(error));"
+      - lang: cURL
+        source: "curl --request GET \\\n  --url https://api.mem0.ai/v1/entities/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/v1/entities/\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/entities/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/entities/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+  /v1/entities/filters/:
+    get:
+      tags:
+      - entities
+      operationId: entities_filters_list
+      responses:
+        '200':
+          description: Successfully retrieved entity filters.
+          content: {}
+  /v2/entities/{entity_type}/{entity_id}/:
+    get:
+      tags:
+      - entities
+      operationId: entities_read
+      parameters:
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - user
+          - agent
+          - app
+          - run
+        description: The type of the entity (user, agent, app, or run).
+      - name: entity_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the entity.
+      responses:
+        '200':
+          description: Successfully retrieved entity details.
+          content: {}
+    delete:
+      tags:
+      - entities
+      operationId: entities_delete
+      parameters:
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - user
+          - agent
+          - app
+          - run
+        description: The type of the entity (user, agent, app, or run).
+      - name: entity_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the entity.
+      responses:
+        '204':
+          description: Entity deleted successfully!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Entity deleted successfully!
+        '400':
+          description: Invalid entity type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid entity type
+      x-code-samples:
+      - lang: Python
+        source: 'import requests
+
+
+          url = "https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/"
+
+
+          headers = {"Authorization": "Token <api-key>"}
+
+
+          response = requests.request("DELETE", url, headers=headers)
+
+
+          print(response.text)'
+      - lang: JavaScript
+        source: "const options = {method: 'DELETE', headers: {Authorization: 'Token <api-key>'}};\n\nfetch('https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/', options)\n  .then(response => response.json())\n  .then(response => console.log(response))\n  .catch(err => console.error(err));"
+      - lang: cURL
+        source: "curl --request DELETE \\\n  --url https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/ \\\n  --header 'Authorization: Token <api-key>'"
+      - lang: Go
+        source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/\"\n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+      - lang: PHP
+        source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"DELETE\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
+      - lang: Java
+        source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'

@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents runs API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: runs
+paths:
+  /v1/runs/:
+    post:
+      tags:
+      - runs
+      description: Create a new Agent Run.
+      operationId: runs_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRun'
+        required: true
+      responses:
+        '201':
+          description: Run created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRun'
+      x-codegen-request-body-name: data
+components:
+  schemas:
+    CreateRun:
+      required:
+      - run_id
+      type: object
+      properties:
+        run_id:
+          title: Run id
+          minLength: 1
+          type: string
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        metadata:
+          title: Metadata
+          type: object
+          properties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'

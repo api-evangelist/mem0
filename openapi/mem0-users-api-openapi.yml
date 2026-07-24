@@ -1,0 +1,58 @@
+openapi: 3.0.1
+info:
+  title: Mem0 API Docs agents users API
+  description: mem0.ai API Docs
+  contact:
+    email: support@mem0.ai
+  license:
+    name: Apache 2.0
+  version: v1
+servers:
+- url: https://api.mem0.ai/
+security:
+- ApiKeyAuth: []
+tags:
+- name: users
+paths:
+  /v1/users/:
+    post:
+      tags:
+      - users
+      description: Create a new User.
+      operationId: users_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+        required: true
+      responses:
+        '201':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUser'
+      x-codegen-request-body-name: data
+components:
+  schemas:
+    CreateUser:
+      required:
+      - user_id
+      type: object
+      properties:
+        user_id:
+          title: User id
+          minLength: 1
+          type: string
+        metadata:
+          title: Metadata
+          type: object
+          properties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
+x-original-swagger-version: '2.0'
