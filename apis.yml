@@ -12,9 +12,22 @@ description: >-
   features cover SOC 2, HIPAA, BYOK, auditable logging, and observability for
   production agent deployments.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mem0.png
 tags:
   - Memory
   - AI Agents
@@ -34,92 +47,231 @@ created: '2026-05-23'
 modified: '2026-05-23'
 specificationVersion: '0.20'
 apis:
-  - aid: mem0:platform-api
-    name: Mem0 Platform API
-    description: >-
-      The Mem0 Platform API provides hosted memory services for AI agents,
-      exposing endpoints for adding, searching, retrieving, updating, and
-      deleting memories, plus entities, events, organizations, projects, and
-      webhooks. The API is REST based and authenticated with a project API key.
-    humanURL: https://docs.mem0.ai/api-reference
-    baseURL: https://api.mem0.ai
-    tags:
-      - Memory
-      - Agent Memory
-      - Search
-      - Webhooks
-      - Multi-Tenant
-      - REST
-    properties:
-      - type: Documentation
-        url: https://docs.mem0.ai
-      - type: GettingStarted
-        url: https://docs.mem0.ai/quickstart
-      - type: Signup
-        url: https://app.mem0.ai
-      - type: APIReference
-        url: https://docs.mem0.ai/api-reference
-      - type: SDKs
-        url: https://github.com/mem0ai/mem0-python
-      - type: SDKs
-        url: https://github.com/mem0ai/mem0-js
-      - type: GitHubRepository
-        url: https://github.com/mem0ai/mem0
-      - type: Pricing
-        url: https://mem0.ai/pricing
-      - type: Authentication
-        url: https://docs.mem0.ai/platform/quickstart
-    features:
-      - name: Add Memories
-        description: Store conversation turns and structured context as memories tied to users or agents.
-      - name: Semantic Search
-        description: Retrieve relevant memories with vector and hybrid search across users, agents, and runs.
-      - name: Memory Lifecycle
-        description: Get, update, and delete memories individually or in batches.
-      - name: Entities
-        description: Manage users and agents as first class entities with their own memory scopes.
-      - name: Organizations and Projects
-        description: Multi-tenant organization, project, and member management for teams and enterprises.
-      - name: Events
-        description: Monitor asynchronous operations such as memory ingestion and processing.
-      - name: Webhooks
-        description: Subscribe to memory and entity events for real-time downstream processing.
-      - name: Graph Memory
-        description: Optional graph-based memory representation for richer relationship modeling.
-      - name: BYOK and Self-Hosted
-        description: Bring your own keys for LLMs and vector stores, or self host with the open source build.
-    useCases:
-      - name: Personalized Assistants
-        description: Give chat assistants long-term memory of user preferences, history, and context.
-      - name: Customer Support Agents
-        description: Remember prior tickets, accounts, and product context across support sessions.
-      - name: Sales and CRM Agents
-        description: Persist account context, deal stage, and conversation history across reps and channels.
-      - name: Healthcare Assistants
-        description: Maintain HIPAA-compliant patient context for clinical and admin workflows.
-      - name: Education Tutors
-        description: Track learner progress, gaps, and preferences across lessons and sessions.
-      - name: Coding Agents
-        description: Remember repo conventions, prior fixes, and developer preferences across sessions.
-    integrations:
-      - name: LangChain
-      - name: LangGraph
-      - name: CrewAI
-      - name: AutoGen
-      - name: LlamaIndex
-      - name: OpenAI Agents SDK
-      - name: Google ADK
-      - name: AWS Bedrock
-      - name: Vercel AI SDK
-      - name: LiveKit
-      - name: ElevenLabs
-      - name: Pipecat
-      - name: Flowise
-      - name: Dify
-      - name: Mastra
-    authentication:
-      - type: API Key
-        description: Authenticate with a project API key in the Authorization header (Token scheme).
+- aid: mem0:platform-api
+  name: Mem0 Platform API
+  description: >-
+    The Mem0 Platform API provides hosted memory services for AI agents, exposing endpoints for adding,
+    searching, retrieving, updating, and deleting memories, plus entities, events, organizations, projects,
+    and webhooks. The API is REST based and authenticated with a project API key.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - Memory
+  - Agent Memory
+  - Search
+  - Webhooks
+  - Multi-Tenant
+  - REST
+  properties:
+  - type: Documentation
+    url: https://docs.mem0.ai
+  - type: GettingStarted
+    url: https://docs.mem0.ai/quickstart
+  - type: Signup
+    url: https://app.mem0.ai
+  - type: APIReference
+    url: https://docs.mem0.ai/api-reference
+  - type: SDKs
+    url: https://github.com/mem0ai/mem0-python
+  - type: SDKs
+    url: https://github.com/mem0ai/mem0-js
+  - type: GitHubRepository
+    url: https://github.com/mem0ai/mem0
+  - type: Pricing
+    url: https://mem0.ai/pricing
+  - type: Authentication
+    url: https://docs.mem0.ai/platform/quickstart
+  features:
+  - name: Add Memories
+    description: Store conversation turns and structured context as memories tied to users or agents.
+  - name: Semantic Search
+    description: Retrieve relevant memories with vector and hybrid search across users, agents, and runs.
+  - name: Memory Lifecycle
+    description: Get, update, and delete memories individually or in batches.
+  - name: Entities
+    description: Manage users and agents as first class entities with their own memory scopes.
+  - name: Organizations and Projects
+    description: Multi-tenant organization, project, and member management for teams and enterprises.
+  - name: Events
+    description: Monitor asynchronous operations such as memory ingestion and processing.
+  - name: Webhooks
+    description: Subscribe to memory and entity events for real-time downstream processing.
+  - name: Graph Memory
+    description: Optional graph-based memory representation for richer relationship modeling.
+  - name: BYOK and Self-Hosted
+    description: Bring your own keys for LLMs and vector stores, or self host with the open source build.
+  useCases:
+  - name: Personalized Assistants
+    description: Give chat assistants long-term memory of user preferences, history, and context.
+  - name: Customer Support Agents
+    description: Remember prior tickets, accounts, and product context across support sessions.
+  - name: Sales and CRM Agents
+    description: Persist account context, deal stage, and conversation history across reps and channels.
+  - name: Healthcare Assistants
+    description: Maintain HIPAA-compliant patient context for clinical and admin workflows.
+  - name: Education Tutors
+    description: Track learner progress, gaps, and preferences across lessons and sessions.
+  - name: Coding Agents
+    description: Remember repo conventions, prior fixes, and developer preferences across sessions.
+  integrations:
+  - name: LangChain
+  - name: LangGraph
+  - name: CrewAI
+  - name: AutoGen
+  - name: LlamaIndex
+  - name: OpenAI Agents SDK
+  - name: Google ADK
+  - name: AWS Bedrock
+  - name: Vercel AI SDK
+  - name: LiveKit
+  - name: ElevenLabs
+  - name: Pipecat
+  - name: Flowise
+  - name: Dify
+  - name: Mastra
+  authentication:
+  - type: API Key
+    description: Authenticate with a project API key in the Authorization header (Token scheme).
+- aid: mem0:mem0-agents-api
+  name: Mem0 agents API
+  description: The agents API from Mem0 — 1 operation(s) for agents.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - agents
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-agents-api-openapi.yml
+- aid: mem0:mem0-apps-api
+  name: Mem0 apps API
+  description: The apps API from Mem0 — 1 operation(s) for apps.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - apps
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-apps-api-openapi.yml
+- aid: mem0:mem0-entities-api
+  name: Mem0 entities API
+  description: The entities API from Mem0 — 3 operation(s) for entities.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - entities
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-entities-api-openapi.yml
+- aid: mem0:mem0-events-api
+  name: Mem0 events API
+  description: The events API from Mem0 — 2 operation(s) for events.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-events-api-openapi.yml
+- aid: mem0:mem0-exports-api
+  name: Mem0 exports API
+  description: The exports API from Mem0 — 2 operation(s) for exports.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - exports
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-exports-api-openapi.yml
+- aid: mem0:mem0-feedback-api
+  name: Mem0 feedback API
+  description: The feedback API from Mem0 — 1 operation(s) for feedback.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-feedback-api-openapi.yml
+- aid: mem0:mem0-memories-api
+  name: Mem0 memories API
+  description: The memories API from Mem0 — 12 operation(s) for memories.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - memories
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-memories-api-openapi.yml
+- aid: mem0:mem0-organizations-api
+  name: Mem0 organizations API
+  description: The organizations API from Mem0 — 3 operation(s) for organizations.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-organizations-api-openapi.yml
+- aid: mem0:mem0-project-api
+  name: Mem0 Project API
+  description: The Project API from Mem0 — 1 operation(s) for project.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - Project
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-project-api-openapi.yml
+- aid: mem0:mem0-projects-api
+  name: Mem0 projects API
+  description: The projects API from Mem0 — 3 operation(s) for projects.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-projects-api-openapi.yml
+- aid: mem0:mem0-runs-api
+  name: Mem0 runs API
+  description: The runs API from Mem0 — 1 operation(s) for runs.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - runs
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-runs-api-openapi.yml
+- aid: mem0:mem0-stats-api
+  name: Mem0 stats API
+  description: The stats API from Mem0 — 1 operation(s) for stats.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - stats
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-stats-api-openapi.yml
+- aid: mem0:mem0-users-api
+  name: Mem0 users API
+  description: The users API from Mem0 — 1 operation(s) for users.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-users-api-openapi.yml
+- aid: mem0:mem0-webhooks-api
+  name: Mem0 webhooks API
+  description: The webhooks API from Mem0 — 2 operation(s) for webhooks.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-webhooks-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/mem0-agentic-access.yml
