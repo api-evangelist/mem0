@@ -1,0 +1,40 @@
+{
+  "provider": "mem0",
+  "sources": [
+    "mem0-agents-api-openapi.yml",
+    "mem0-apps-api-openapi.yml",
+    "mem0-entities-api-openapi.yml",
+    "mem0-events-api-openapi.yml",
+    "mem0-exports-api-openapi.yml",
+    "mem0-feedback-api-openapi.yml",
+    "mem0-memories-api-openapi.yml",
+    "mem0-organizations-api-openapi.yml",
+    "mem0-project-api-openapi.yml",
+    "mem0-projects-api-openapi.yml",
+    "mem0-runs-api-openapi.yml",
+    "mem0-stats-api-openapi.yml",
+    "mem0-users-api-openapi.yml",
+    "mem0-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "mem0-agents-api-openapi.yml",
+    "mem0-apps-api-openapi.yml",
+    "mem0-entities-api-openapi.yml",
+    "mem0-events-api-openapi.yml",
+    "mem0-exports-api-openapi.yml",
+    "mem0-feedback-api-openapi.yml",
+    "mem0-memories-api-openapi.yml",
+    "mem0-organizations-api-openapi.yml",
+    "mem0-project-api-openapi.yml",
+    "mem0-projects-api-openapi.yml",
+    "mem0-runs-api-openapi.yml",
+    "mem0-stats-api-openapi.yml",
+    "mem0-users-api-openapi.yml",
+    "mem0-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
