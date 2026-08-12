@@ -273,6 +273,17 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-webhooks-api-openapi.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/mem0ai/mem0/issues
+  - type: Releases
+    url: https://github.com/mem0ai/mem0/releases
+  - type: SecurityPolicy
+    url: https://github.com/mem0ai/mem0/blob/main/SECURITY.md
+  - type: ContributionGuide
+    url: https://github.com/mem0ai/mem0/blob/main/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/mem0ai/mem0/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/mem0-agentic-access.yml
   - type: DomainSecurity
