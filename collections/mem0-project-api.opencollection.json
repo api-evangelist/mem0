@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents Project API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Project",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete Project Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/members/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email of the member to be removed"
+              }
+            ]
+          },
+          "docs": "Delete Project Member"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

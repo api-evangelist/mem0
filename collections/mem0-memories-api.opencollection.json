@@ -1,0 +1,439 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents memories API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "memories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "memories_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/memories/",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by user ID."
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by agent ID."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by app ID."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by run ID."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by metadata (JSON string)."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by categories."
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by organization ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by project ID."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by fields."
+              },
+              {
+                "name": "keywords",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by keywords."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination. Default: 1."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page. Default: 100."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by start date."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by end date."
+              }
+            ]
+          },
+          "docs": "Get all memories."
+        },
+        {
+          "info": {
+            "name": "memories_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v1/memories/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add memories."
+        },
+        {
+          "info": {
+            "name": "memories_delete_all",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/v1/memories/",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID. Pass `*` to delete memories for all users."
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by agent ID. Pass `*` to delete memories for all agents."
+              },
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by app ID. Pass `*` to delete memories for all apps."
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by run ID. Pass `*` to delete memories for all runs."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by metadata (JSON string)."
+              },
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by organization ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter memories by project ID."
+              }
+            ]
+          },
+          "docs": "Delete memories by filter. At least one filter is required — previously omitting all filters silently deleted everything; now it returns a validation error."
+        },
+        {
+          "info": {
+            "name": "memories_list_v2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v2/memories/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all memories."
+        },
+        {
+          "info": {
+            "name": "memories_events_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/memories/events/"
+          }
+        },
+        {
+          "info": {
+            "name": "memories_search_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v1/memories/search/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a semantic search on memories."
+        },
+        {
+          "info": {
+            "name": "memories_search_v2",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v2/memories/search/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search memories based on a query and filters."
+        },
+        {
+          "info": {
+            "name": "Get all memories (V3, paginated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v3/memories/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "1-indexed page number."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List memories scoped by filters, paginated. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. `filters` supports the same operator set as V2 search (`AND`, `OR`, `NOT`, `in`, `gte`, `lte`, etc.). Response is a paginated envelope; pass `page` and `page_size` as query parameters to step through results."
+        },
+        {
+          "info": {
+            "name": "Add memories (V3)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v3/memories/add/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extract and store memories from a conversation using the V3 additive pipeline. Entity IDs (`user_id` / `agent_id` / `run_id`) are accepted at the top level. At least one entity ID is required so the memory is scoped to a session."
+        },
+        {
+          "info": {
+            "name": "Search memories (V3)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v3/memories/search/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Relevance-ranked search across stored memories. V3 uses hybrid retrieval and can also apply temporal reasoning for time-aware queries. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. At least one entity ID is required."
+        },
+        {
+          "info": {
+            "name": "memories_entity_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/memories/:entity_type/:entity_id/",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "memories_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/memories/:memory_id/",
+            "params": [
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the memory to retrieve."
+              }
+            ]
+          },
+          "docs": "Get a memory."
+        },
+        {
+          "info": {
+            "name": "memories_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mem0.ai/v1/memories/:memory_id/",
+            "params": [
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the memory to retrieve."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get or Update or delete a memory."
+        },
+        {
+          "info": {
+            "name": "memories_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/v1/memories/:memory_id/",
+            "params": [
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the memory to retrieve."
+              }
+            ]
+          },
+          "docs": "Get or Update or delete a memory."
+        },
+        {
+          "info": {
+            "name": "memories_history_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/memories/:memory_id/history/",
+            "params": [
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the memory to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve the history of a memory."
+        },
+        {
+          "info": {
+            "name": "memories_batch_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mem0.ai/v1/batch/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch update multiple memories (up to 1000) in a single API call."
+        },
+        {
+          "info": {
+            "name": "memories_batch_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/v1/batch/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch delete multiple memories (up to 1000) in a single API call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents projects API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of projects for a specific organization."
+        },
+        {
+          "info": {
+            "name": "Create project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new project within an organization."
+        },
+        {
+          "info": {
+            "name": "Get project details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific project within an organization."
+        },
+        {
+          "info": {
+            "name": "Update Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project to be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a specific project's settings."
+        },
+        {
+          "info": {
+            "name": "Delete Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete a specific project and its related data."
+        },
+        {
+          "info": {
+            "name": "Get Project Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/members/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of members for a specific project."
+        },
+        {
+          "info": {
+            "name": "Add member to project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/members/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new member to a specific project within an organization."
+        },
+        {
+          "info": {
+            "name": "Update project member role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.mem0.ai/api/v1/orgs/organizations/:org_id/projects/:project_id/members/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the project."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the role of a member in a specific project within an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

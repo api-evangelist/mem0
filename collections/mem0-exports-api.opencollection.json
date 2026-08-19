@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents exports API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "exports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an export job with schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v1/exports/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a structured export of memories based on a provided schema."
+        },
+        {
+          "info": {
+            "name": "Export data based on filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mem0.ai/v1/exports/get",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the latest memory export."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

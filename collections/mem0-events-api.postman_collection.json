@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "df864f99-e4c9-496e-ad7e-fae70cba030e",
+      "name": "events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54cd502e-87e2-4de9-a1c8-0dcf50e6b464",
+          "name": "Retrieve all events for current organization and project.",
+          "request": {
+            "name": "Retrieve all events for current organization and project.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e88a286-9909-4a24-af85-e73106216b53",
+              "name": "Successfully retrieved events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5344,\n  \"results\": [\n    {\n      \"id\": \"fd5073a3-6521-7177-15a0-1034d2a8d671\",\n      \"event_type\": \"string\",\n      \"status\": \"FAILED\",\n      \"payload\": {},\n      \"metadata\": {},\n      \"created_at\": \"2020-11-15T12:25:02.075Z\",\n      \"updated_at\": \"2002-11-06T18:28:57.322Z\",\n      \"started_at\": \"1985-02-15T10:14:28.497Z\",\n      \"completed_at\": \"1981-03-24T00:23:35.756Z\",\n      \"latency\": 3493.729477206109\n    },\n    {\n      \"id\": \"f025a703-bb2b-950c-6f53-1a7f2ccec234\",\n      \"event_type\": \"string\",\n      \"status\": \"PENDING\",\n      \"payload\": {},\n      \"metadata\": {},\n      \"created_at\": \"1994-05-05T21:59:59.725Z\",\n      \"updated_at\": \"1988-03-04T16:31:34.999Z\",\n      \"started_at\": \"2010-10-01T15:01:57.298Z\",\n      \"completed_at\": \"1995-09-03T01:44:16.495Z\",\n      \"latency\": 9787.095103547827\n    }\n  ],\n  \"next\": \"string\",\n  \"previous\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87ce2814-6cf9-4387-97cb-a54743d807fb",
+          "name": "Retrieve details of a specific event by its ID.",
+          "request": {
+            "name": "Retrieve details of a specific event by its ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "event",
+                ":event_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "event_id",
+                  "description": "(Required) The unique identifier of the event (UUID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9928221-9767-499f-b732-9d5826b0b732",
+              "name": "Successfully retrieved event details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event",
+                    ":event_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "event_id",
+                      "description": "(Required) The unique identifier of the event (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3d63ec35-a1c2-1adf-d87e-34f6533f2fcd\",\n  \"event_type\": \"string\",\n  \"status\": \"SUCCEEDED\",\n  \"payload\": {},\n  \"metadata\": {},\n  \"created_at\": \"2022-11-11T04:49:36.789Z\",\n  \"updated_at\": \"1978-07-19T08:28:24.572Z\",\n  \"started_at\": \"1959-09-29T02:18:43.638Z\",\n  \"completed_at\": \"1954-05-27T09:15:42.020Z\",\n  \"latency\": 8728.394299589329\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad78636d-c28e-4e78-9470-909d8952e907",
+              "name": "Event not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event",
+                    ":event_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "event_id",
+                      "description": "(Required) The unique identifier of the event (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mem0.ai/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "241dd648-bdc3-4e9a-b934-a64aa1ce16d5",
+    "name": "Mem0 API Docs agents events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "mem0.ai API Docs\n\nContact Support:\n Email: support@mem0.ai",
+      "type": "text/plain"
+    }
+  }
+}

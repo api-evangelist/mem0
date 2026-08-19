@@ -1,0 +1,2720 @@
+{
+  "item": [
+    {
+      "id": "cd8952e5-c3ca-4562-8143-a555f33fb3ca",
+      "name": "memories",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3da40b57-3f42-45e6-83bb-47826d05e507",
+          "name": "memories list",
+          "request": {
+            "name": "memories list",
+            "description": {
+              "content": "Get all memories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "Filter memories by user ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<string>",
+                  "description": "Filter memories by agent ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "Filter memories by app ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "run_id",
+                  "value": "<string>",
+                  "description": "Filter memories by run ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Filter memories by categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Filter memories by categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "Filter memories by organization ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<string>",
+                  "description": "Filter memories by project ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Filter memories by fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Filter memories by fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "keywords",
+                  "value": "<string>",
+                  "description": "Filter memories by keywords."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for pagination. Default: 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of items per page. Default: 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "Filter memories by start date."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Filter memories by end date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76453236-b15c-4a3a-bef7-f01e2840c401",
+              "name": "Successfully retrieved memories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "run_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"memory\": \"string\",\n    \"created_at\": \"1964-11-02T13:11:25.360Z\",\n    \"updated_at\": \"1967-12-10T07:03:48.853Z\",\n    \"owner\": \"string\",\n    \"organization\": \"string\",\n    \"input\": [\n      {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null,\n    \"metadata\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"memory\": \"string\",\n    \"created_at\": \"1980-03-10T08:34:26.039Z\",\n    \"updated_at\": \"1952-07-19T17:00:53.711Z\",\n    \"owner\": \"string\",\n    \"organization\": \"string\",\n    \"input\": [\n      {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      }\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null,\n    \"metadata\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "912f9c41-968b-43ae-b8ce-908de0e7fd69",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "run_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"One of the filters: app_id, user_id, agent_id, run_id is required!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0575efa-5d33-4890-b3b3-6acfc5e366e8",
+          "name": "memories create",
+          "request": {
+            "name": "memories create",
+            "description": {
+              "content": "Add memories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    }\n  ],\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"includes\": \"<string>\",\n  \"excludes\": \"<string>\",\n  \"infer\": true,\n  \"output_format\": \"v1.1\",\n  \"custom_categories\": {},\n  \"custom_instructions\": \"<string>\",\n  \"immutable\": false,\n  \"async_mode\": true,\n  \"timestamp\": \"<integer>\",\n  \"expiration_date\": \"<date>\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0514ae6-5b63-43ba-98a4-434937ad0d5d",
+              "name": "Successful memory creation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"key_0\": \"<string>\"\n    },\n    {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    }\n  ],\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"includes\": \"<string>\",\n  \"excludes\": \"<string>\",\n  \"infer\": true,\n  \"output_format\": \"v1.1\",\n  \"custom_categories\": {},\n  \"custom_instructions\": \"<string>\",\n  \"immutable\": false,\n  \"async_mode\": true,\n  \"timestamp\": \"<integer>\",\n  \"expiration_date\": \"<date>\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"data\": {\n      \"memory\": \"string\"\n    },\n    \"event\": \"UPDATE\"\n  },\n  {\n    \"id\": \"string\",\n    \"data\": {\n      \"memory\": \"string\"\n    },\n    \"event\": \"ADD\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe8a19dc-8f44-433a-8503-cc78287d561c",
+              "name": "Bad Request. Invalid input data. Please refer to the memory creation documentation at https://docs.mem0.ai/platform/quickstart#4-1-create-memories for correct formatting and required fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"key_0\": \"<string>\"\n    },\n    {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    }\n  ],\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"includes\": \"<string>\",\n  \"excludes\": \"<string>\",\n  \"infer\": true,\n  \"output_format\": \"v1.1\",\n  \"custom_categories\": {},\n  \"custom_instructions\": \"<string>\",\n  \"immutable\": false,\n  \"async_mode\": true,\n  \"timestamp\": \"<integer>\",\n  \"expiration_date\": \"<date>\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"400 Bad Request\",\n  \"details\": {\n    \"message\": \"Invalid input data. Please refer to the memory creation documentation at https://docs.mem0.ai/platform/quickstart#4-1-create-memories for correct formatting and required fields.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97e3a4be-d09c-41a5-8411-561add40b7da",
+          "name": "memories delete all",
+          "request": {
+            "name": "memories delete all",
+            "description": {
+              "content": "Delete memories by filter. At least one filter is required — previously omitting all filters silently deleted everything; now it returns a validation error.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "Filter by user ID. Pass `*` to delete memories for all users."
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<string>",
+                  "description": "Filter by agent ID. Pass `*` to delete memories for all agents."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "Filter by app ID. Pass `*` to delete memories for all apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "run_id",
+                  "value": "<string>",
+                  "description": "Filter by run ID. Pass `*` to delete memories for all runs."
+                },
+                {
+                  "disabled": false,
+                  "key": "org_id",
+                  "value": "<string>",
+                  "description": "Filter memories by organization ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<string>",
+                  "description": "Filter memories by project ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c65b59e-bbbf-4a6f-a104-819c68cfab19",
+              "name": "Successful deletion of memories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "run_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "org_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Memories deleted successfully!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a48f420b-1d2c-4919-a9bf-ba1837dacbce",
+          "name": "memories list v2",
+          "request": {
+            "name": "memories list v2",
+            "description": {
+              "content": "Get all memories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "memories",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<string>\",\n    \"app_id\": \"<string>\",\n    \"run_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"keywords\": {\n      \"contains\": \"<string>\",\n      \"icontains\": \"<string>\"\n    },\n    \"categories\": {\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"metadata\": \"<object>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": 1,\n  \"page_size\": 100,\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "569f7c8e-318f-42b0-b922-6cc910442760",
+              "name": "Successfully retrieved memories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<string>\",\n    \"app_id\": \"<string>\",\n    \"run_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"keywords\": {\n      \"contains\": \"<string>\",\n      \"icontains\": \"<string>\"\n    },\n    \"categories\": {\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"metadata\": \"<object>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": 1,\n  \"page_size\": 100,\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"memory\": \"string\",\n    \"created_at\": \"1976-07-21T04:56:41.684Z\",\n    \"updated_at\": \"1971-11-11T08:48:04.263Z\",\n    \"owner\": \"string\",\n    \"organization\": \"string\",\n    \"immutable\": false,\n    \"expiration_date\": null,\n    \"metadata\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"memory\": \"string\",\n    \"created_at\": \"1995-07-03T03:42:04.016Z\",\n    \"updated_at\": \"1958-06-10T20:47:47.136Z\",\n    \"owner\": \"string\",\n    \"organization\": \"string\",\n    \"immutable\": false,\n    \"expiration_date\": null,\n    \"metadata\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db9dac0e-f27b-44c7-b2f9-6b94029c5334",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<string>\",\n    \"app_id\": \"<string>\",\n    \"run_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"keywords\": {\n      \"contains\": \"<string>\",\n      \"icontains\": \"<string>\"\n    },\n    \"categories\": {\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"metadata\": \"<object>\"\n  },\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"page\": 1,\n  \"page_size\": 100,\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"One of the filters: app_id, user_id, agent_id, run_id is required!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c523d1a-b5af-4ee9-8756-5e391733051d",
+          "name": "memories events list",
+          "request": {
+            "name": "memories events list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                "events",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "094156dc-e7cd-40d3-ab66-b5f91da3d55e",
+              "name": "Successfully retrieved memory events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    "events",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7ccc8f2-fa61-48d7-a498-24d176e8518c",
+          "name": "memories search create",
+          "request": {
+            "name": "memories search create",
+            "description": {
+              "content": "Perform a semantic search on memories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                "search",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"top_k\": 10,\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rerank\": false,\n  \"keyword_search\": false,\n  \"output_format\": \"v1.1\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"filter_memories\": false,\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_metadata_based_search\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87281bb8-230e-4839-a07d-edcf9501252d",
+              "name": "Successfully retrieved search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"top_k\": 10,\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rerank\": false,\n  \"keyword_search\": false,\n  \"output_format\": \"v1.1\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"filter_memories\": false,\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_metadata_based_search\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2bdc188a-9e53-6025-0670-51ca96aaf376\",\n    \"memory\": \"string\",\n    \"user_id\": \"string\",\n    \"created_at\": \"1999-09-11T00:58:27.788Z\",\n    \"updated_at\": \"2025-06-24T22:43:09.630Z\",\n    \"metadata\": {},\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null\n  },\n  {\n    \"id\": \"9c16f414-a8e5-a0e3-1671-6edabff3d1b7\",\n    \"memory\": \"string\",\n    \"user_id\": \"string\",\n    \"created_at\": \"1955-07-19T23:41:22.325Z\",\n    \"updated_at\": \"2023-11-18T06:11:30.095Z\",\n    \"metadata\": {},\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08964def-d780-4aa9-a66e-9c46f07e1574",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"agent_id\": \"<string>\",\n  \"user_id\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {},\n  \"top_k\": 10,\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rerank\": false,\n  \"keyword_search\": false,\n  \"output_format\": \"v1.1\",\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"filter_memories\": false,\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"only_metadata_based_search\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"At least one of the filters: agent_id, user_id, app_id, run_id is required!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "553a4d8b-77e8-4185-8cda-3bdfd695ec11",
+          "name": "memories search v2",
+          "request": {
+            "name": "memories search v2",
+            "description": {
+              "content": "Search memories based on a query and filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "memories",
+                "search",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"filters\": {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<string>\",\n    \"app_id\": \"<string>\",\n    \"run_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"keywords\": {\n      \"contains\": \"<string>\",\n      \"icontains\": \"<string>\"\n    },\n    \"categories\": {\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"metadata\": \"<object>\"\n  },\n  \"version\": \"v2\",\n  \"top_k\": 10,\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rerank\": false,\n  \"keyword_search\": false,\n  \"filter_memories\": false,\n  \"threshold\": 0.3,\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d21d898-59fe-4e21-b6da-a7d35d354795",
+              "name": "Successfully retrieved search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"filters\": {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<string>\",\n    \"app_id\": \"<string>\",\n    \"run_id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"keywords\": {\n      \"contains\": \"<string>\",\n      \"icontains\": \"<string>\"\n    },\n    \"categories\": {\n      \"in\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"metadata\": \"<object>\"\n  },\n  \"version\": \"v2\",\n  \"top_k\": 10,\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rerank\": false,\n  \"keyword_search\": false,\n  \"filter_memories\": false,\n  \"threshold\": 0.3,\n  \"org_id\": \"<string>\",\n  \"project_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2bdc188a-9e53-6025-0670-51ca96aaf376\",\n    \"memory\": \"string\",\n    \"user_id\": \"string\",\n    \"created_at\": \"1999-09-11T00:58:27.788Z\",\n    \"updated_at\": \"2025-06-24T22:43:09.630Z\",\n    \"metadata\": {},\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null\n  },\n  {\n    \"id\": \"9c16f414-a8e5-a0e3-1671-6edabff3d1b7\",\n    \"memory\": \"string\",\n    \"user_id\": \"string\",\n    \"created_at\": \"1955-07-19T23:41:22.325Z\",\n    \"updated_at\": \"2023-11-18T06:11:30.095Z\",\n    \"metadata\": {},\n    \"categories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"immutable\": false,\n    \"expiration_date\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5aa0171-b5c3-4bd8-b25f-7901bb7cfad5",
+          "name": "Get all memories (V3, paginated)",
+          "request": {
+            "name": "Get all memories (V3, paginated)",
+            "description": {
+              "content": "List memories scoped by filters, paginated. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. `filters` supports the same operator set as V2 search (`AND`, `OR`, `NOT`, `in`, `gte`, `lte`, etc.). Response is a paginated envelope; pass `page` and `page_size` as query parameters to step through results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "memories",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "1-indexed page number."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "Results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filters\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1722\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f593ea9-a8b1-4f53-97fc-96c8fa35e112",
+              "name": "Paginated envelope of memories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"user_id\": \"alice\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"next\": \"https://api.mem0.ai/v3/memories/?page=2&page_size=100\",\n  \"previous\": null,\n  \"results\": [\n    {\n      \"id\": \"mem-uuid\",\n      \"memory\": \"User moved to San Francisco from New York in January 2026\",\n      \"metadata\": {},\n      \"categories\": [\n        \"location\"\n      ],\n      \"created_at\": \"2026-01-15T10:30:00Z\",\n      \"updated_at\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1e118c2-046d-4909-80e9-7d75c9486961",
+              "name": "Validation error — e.g. empty `filters` or no positively-scoped entity ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"user_id\": \"alice\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a50881d0-7569-45ee-bb87-d09c131f109f",
+              "name": "Unauthorized — missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filters\": {\n    \"user_id\": \"alice\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebc86916-95d0-403b-b783-4200862b18f5",
+          "name": "Add memories (V3)",
+          "request": {
+            "name": "Add memories (V3)",
+            "description": {
+              "content": "Extract and store memories from a conversation using the V3 additive pipeline. Entity IDs (`user_id` / `agent_id` / `run_id`) are accepted at the top level. At least one entity ID is required so the memory is scoped to a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "memories",
+                "add",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"user_id\": \"<string>\",\n  \"agent_id\": \"<string>\",\n  \"run_id\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 7089.819819282939,\n    \"key_1\": true,\n    \"key_2\": true\n  },\n  \"custom_instructions\": \"<string>\",\n  \"infer\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e82b93e4-65a8-47c8-b521-595fba86a102",
+              "name": "Memory addition queued; returns an event identifier clients can poll via `GET /v1/event/{event_id}/`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "add",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"I just moved to San Francisco from New York.\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"Got it — I'll update your location.\"\n    }\n  ],\n  \"user_id\": \"alice\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Memory processing has been queued for background execution\",\n  \"status\": \"PENDING\",\n  \"event_id\": \"2c4d1f44-4f7b-4b2f-9f6e-7b5b4f5a1234\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a16b746-d3cd-4c69-b008-795b739ba6e9",
+              "name": "Validation error — e.g. missing `messages` or no entity ID supplied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "add",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"I just moved to San Francisco from New York.\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"Got it — I'll update your location.\"\n    }\n  ],\n  \"user_id\": \"alice\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "921e55df-e206-428d-aeb6-a3f2a5d08e73",
+              "name": "Unauthorized — missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "add",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"I just moved to San Francisco from New York.\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"Got it — I'll update your location.\"\n    }\n  ],\n  \"user_id\": \"alice\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1a71d5b-9315-4cf4-8d28-81fac28aaf02",
+          "name": "Search memories (V3)",
+          "request": {
+            "name": "Search memories (V3)",
+            "description": {
+              "content": "Relevance-ranked search across stored memories. V3 uses hybrid retrieval and can also apply temporal reasoning for time-aware queries. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. At least one entity ID is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "memories",
+                "search",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"filters\": {\n    \"key_0\": true,\n    \"key_1\": 9429\n  },\n  \"top_k\": 10,\n  \"threshold\": 0.1,\n  \"rerank\": false,\n  \"reference_date\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0967868b-956b-490f-a3b7-e4dd2561a71b",
+              "name": "Ranked search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"where does the user live?\",\n  \"filters\": {\n    \"user_id\": \"alice\"\n  },\n  \"top_k\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"mem-uuid\",\n      \"memory\": \"User moved to San Francisco from New York in January 2026\",\n      \"score\": 0.82,\n      \"metadata\": {},\n      \"categories\": [\n        \"location\"\n      ],\n      \"created_at\": \"2026-01-15T10:30:00Z\",\n      \"updated_at\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bae6aeb2-e978-4c75-a62a-2ff61e354fd7",
+              "name": "Validation error — e.g. empty `query`, missing `filters`, or no positively-scoped entity ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"where does the user live?\",\n  \"filters\": {\n    \"user_id\": \"alice\"\n  },\n  \"top_k\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edf76dcc-5513-48b0-83d7-e6f930e66af8",
+              "name": "Unauthorized — missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "memories",
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"where does the user live?\",\n  \"filters\": {\n    \"user_id\": \"alice\"\n  },\n  \"top_k\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33eaa10b-4631-4436-90aa-340b437fdce7",
+          "name": "memories entity read",
+          "request": {
+            "name": "memories entity read",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ":entity_type",
+                ":entity_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_type",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9fca447-3207-4b5f-afb6-6c293c14f071",
+              "name": "Successfully retrieved memories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":entity_type",
+                    ":entity_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a108d8e-4f3b-4ced-bebb-41777be9f73f",
+          "name": "memories read",
+          "request": {
+            "name": "memories read",
+            "description": {
+              "content": "Get a memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ":memory_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "memory_id",
+                  "description": "(Required) The unique identifier of the memory to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53254264-5b5e-4c99-be7c-2c43335577ef",
+              "name": "Successfully retrieved the memory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":memory_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "memory_id",
+                      "description": "(Required) The unique identifier of the memory to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"37f30fbb-3a01-4448-bbb4-2614b3533896\",\n  \"memory\": \"string\",\n  \"user_id\": \"string\",\n  \"agent_id\": \"string\",\n  \"app_id\": \"string\",\n  \"run_id\": \"string\",\n  \"hash\": \"string\",\n  \"metadata\": {},\n  \"created_at\": \"1947-09-06T09:24:50.377Z\",\n  \"updated_at\": \"2010-10-15T00:30:28.478Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0805f745-49ae-4edf-b454-e8d74884d68f",
+              "name": "Memory not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":memory_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "memory_id",
+                      "description": "(Required) The unique identifier of the memory to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Memory not found!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3daab16d-98d3-465a-b02a-0aeee357a096",
+          "name": "memories update",
+          "request": {
+            "name": "memories update",
+            "description": {
+              "content": "Get or Update or delete a memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ":memory_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "memory_id",
+                  "description": "(Required) The unique identifier of the memory to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c97f01d-5b3c-49a4-9f65-1c044727575b",
+              "name": "Successfully updated memory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":memory_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "memory_id",
+                      "description": "(Required) The unique identifier of the memory to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"61d5a115-f203-a47d-6147-eaf03a623077\",\n  \"text\": \"string\",\n  \"user_id\": \"string\",\n  \"agent_id\": \"string\",\n  \"app_id\": \"string\",\n  \"run_id\": \"string\",\n  \"hash\": \"string\",\n  \"metadata\": {},\n  \"created_at\": \"2011-07-05T00:55:10.122Z\",\n  \"updated_at\": \"1999-06-29T02:32:41.127Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3373dc79-b4f2-4bc2-a1f6-799a60bd86e4",
+          "name": "memories delete",
+          "request": {
+            "name": "memories delete",
+            "description": {
+              "content": "Get or Update or delete a memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ":memory_id",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "memory_id",
+                  "description": "(Required) The unique identifier of the memory to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57defe98-582f-4fde-b18d-305ac663d60c",
+              "name": "Successful deletion of memory.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":memory_id",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "memory_id",
+                      "description": "(Required) The unique identifier of the memory to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Memory deleted successfully!\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d86abe5-7765-4f5e-8083-2a3ee4646ffd",
+          "name": "memories history list",
+          "request": {
+            "name": "memories history list",
+            "description": {
+              "content": "Retrieve the history of a memory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "memories",
+                ":memory_id",
+                "history",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "memory_id",
+                  "description": "(Required) The unique identifier of the memory to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47f83fbe-c960-4563-9a0b-4fd7916d5387",
+              "name": "Successfully retrieved the memory history.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "memories",
+                    ":memory_id",
+                    "history",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "memory_id",
+                      "description": "(Required) The unique identifier of the memory to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1af419e1-e310-e2ab-dd77-b7f67c734115\",\n    \"memory_id\": \"fe222abe-3bac-c4d1-d35c-e9972b1f6a32\",\n    \"input\": [\n      {\n        \"role\": \"assistant\",\n        \"content\": \"string\"\n      },\n      {\n        \"role\": \"user\",\n        \"content\": \"string\"\n      }\n    ],\n    \"new_memory\": \"string\",\n    \"user_id\": \"string\",\n    \"event\": \"ADD\",\n    \"created_at\": \"2022-05-15T07:49:52.689Z\",\n    \"updated_at\": \"1958-04-21T22:28:43.485Z\",\n    \"old_memory\": \"string\",\n    \"metadata\": {}\n  },\n  {\n    \"id\": \"523fda5f-599d-a333-7620-30e4a5833965\",\n    \"memory_id\": \"7aa870f0-89ee-8a5f-a565-69b3f3a120b0\",\n    \"input\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"string\"\n      },\n      {\n        \"role\": \"assistant\",\n        \"content\": \"string\"\n      }\n    ],\n    \"new_memory\": \"string\",\n    \"user_id\": \"string\",\n    \"event\": \"UPDATE\",\n    \"created_at\": \"1957-08-20T03:44:18.149Z\",\n    \"updated_at\": \"1968-03-18T17:40:25.988Z\",\n    \"old_memory\": \"string\",\n    \"metadata\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f94478-a9fb-4596-a125-a7c1a9a00045",
+          "name": "memories batch update",
+          "request": {
+            "name": "memories batch update",
+            "description": {
+              "content": "Batch update multiple memories (up to 1000) in a single API call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memories\": [\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8cfe505-abe2-4a47-bb63-634155ed7c4d",
+              "name": "Successfully updated memories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memories\": [\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Successfully updated 2 memories\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dbd7b1c-3813-40fd-b2fb-bafdc851961d",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memories\": [\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"memory_id\": \"<uuid>\",\n      \"text\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Maximum of 1000 memories can be updated in a single request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f579d6b-fb48-4e87-bf32-107ba4f680a1",
+          "name": "memories batch delete",
+          "request": {
+            "name": "memories batch delete",
+            "description": {
+              "content": "Batch delete multiple memories (up to 1000) in a single API call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "batch",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memory_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dff4b2f-9188-4221-a3af-45baea506844",
+              "name": "Successfully deleted memories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memory_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Successfully deleted 2 memories\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f16c2db5-a5ca-49cb-b335-05295a0f1072",
+              "name": "Bad Request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batch",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memory_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Maximum of 1000 memories can be deleted in a single request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mem0.ai/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95c85fab-c44a-4f2e-868d-5c553439e72f",
+    "name": "Mem0 API Docs agents memories API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "mem0.ai API Docs\n\nContact Support:\n Email: support@mem0.ai",
+      "type": "text/plain"
+    }
+  }
+}

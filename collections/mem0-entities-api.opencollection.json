@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents entities API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "entities_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/entities/",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter entities by organization ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter entities by project ID."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "entities_filters_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/entities/filters/"
+          }
+        },
+        {
+          "info": {
+            "name": "entities_read",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v2/entities/:entity_type/:entity_id/",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of the entity (user, agent, app, or run)."
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "entities_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.mem0.ai/v2/entities/:entity_type/:entity_id/",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of the entity (user, agent, app, or run)."
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

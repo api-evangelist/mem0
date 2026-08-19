@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mem0 API Docs agents events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all events for current organization and project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/events/"
+          },
+          "docs": "Retrieve all events for current organization and project."
+        },
+        {
+          "info": {
+            "name": "Retrieve details of a specific event by its ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mem0.ai/v1/event/:event_id/",
+            "params": [
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the event (UUID)."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific event by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
