@@ -35,6 +35,20 @@ tags:
   - Context
   - LLMs
   - Retrieval
+  - Vectors
+  - LangChain
+  - CrewAI
+  - AutoGen
+  - LlamaIndex
+  - Open-Source
+  - Infrastructure
+tags_raw:
+  - Memory
+  - AI Agents
+  - Agent Memory
+  - Context
+  - LLMs
+  - Retrieval
   - Vector
   - LangChain
   - CrewAI
@@ -56,6 +70,13 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Memory
+  - Agent Memory
+  - Search
+  - Webhook
+  - Multi-Tenant
+  - REST
+  tags_raw:
   - Memory
   - Agent Memory
   - Search
@@ -138,6 +159,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Agents
+  tags_raw:
   - agents
   properties:
   - type: OpenAPI
@@ -148,6 +171,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Application
+  tags_raw:
   - apps
   properties:
   - type: OpenAPI
@@ -158,6 +183,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Entities
+  tags_raw:
   - entities
   properties:
   - type: OpenAPI
@@ -168,6 +195,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -178,6 +207,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Export
+  tags_raw:
   - exports
   properties:
   - type: OpenAPI
@@ -188,6 +219,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Feedback
+  tags_raw:
   - feedback
   properties:
   - type: OpenAPI
@@ -198,6 +231,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Memories
+  tags_raw:
   - memories
   properties:
   - type: OpenAPI
@@ -208,6 +243,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Organization
+  tags_raw:
   - organizations
   properties:
   - type: OpenAPI
@@ -228,6 +265,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Project
+  tags_raw:
   - projects
   properties:
   - type: OpenAPI
@@ -238,6 +277,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Runs
+  tags_raw:
   - runs
   properties:
   - type: OpenAPI
@@ -248,6 +289,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Stats
+  tags_raw:
   - stats
   properties:
   - type: OpenAPI
@@ -258,6 +301,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -268,6 +313,8 @@ apis:
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
