@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents API
+  title: Mem0 API Docs Agents API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: agents
+- name: Agents
 paths:
   /v1/agents/:
     post:
       tags:
-      - agents
+      - Agents
       description: Create a new Agent.
       operationId: agents_create
       requestBody:
@@ -34,6 +34,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateAgent'
       x-codegen-request-body-name: data
+      summary: Agents create
+      x-summary-source: derived
 components:
   schemas:
     CreateAgent:

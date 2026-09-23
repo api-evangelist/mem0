@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents entities API
+  title: Mem0 API Docs Entities API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: entities
+- name: Entities
 paths:
   /v1/entities/:
     get:
       tags:
-      - entities
+      - Entities
       operationId: entities_list
       parameters:
       - name: org_id
@@ -106,19 +106,23 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/entities/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/entities/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Entities list
+      x-summary-source: derived
   /v1/entities/filters/:
     get:
       tags:
-      - entities
+      - Entities
       operationId: entities_filters_list
       responses:
         '200':
           description: Successfully retrieved entity filters.
           content: {}
+      summary: Entities filters list
+      x-summary-source: derived
   /v2/entities/{entity_type}/{entity_id}/:
     get:
       tags:
-      - entities
+      - Entities
       operationId: entities_read
       parameters:
       - name: entity_type
@@ -142,9 +146,11 @@ paths:
         '200':
           description: Successfully retrieved entity details.
           content: {}
+      summary: Entities read
+      x-summary-source: derived
     delete:
       tags:
-      - entities
+      - Entities
       operationId: entities_delete
       parameters:
       - name: entity_type
@@ -210,6 +216,8 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"DELETE\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/v2/entities/{entity_type}/{entity_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Entities delete
+      x-summary-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

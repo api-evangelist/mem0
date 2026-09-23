@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents memories API
+  title: Mem0 API Docs Memories API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: memories
+- name: Memories
 paths:
   /v1/memories/:
     get:
       tags:
-      - memories
+      - Memories
       description: Get all memories.
       operationId: memories_list
       parameters:
@@ -134,11 +134,12 @@ paths:
                       title: Immutable
                       default: false
                     expiration_date:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date
                       description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
                       title: Expiration date
-                      nullable: true
                       default: null
                     organization:
                       type: string
@@ -193,9 +194,11 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/memories/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/memories/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Memories list
+      x-summary-source: derived
     post:
       tags:
-      - memories
+      - Memories
       description: Add memories.
       operationId: memories_create
       requestBody:
@@ -260,9 +263,11 @@ paths:
       - lang: Java
         source: "HttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/v1/memories/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"messages\\\": [\n    {}\n  ],\n  \\\"agent_id\\\": \\\"<string>\\\",\n  \\\"user_id\\\": \\\"<string>\\\",\n  \\\"app_id\\\": \\\"<string>\\\",\n  \\\"run_id\\\": \\\"<string>\\\",\n  \\\"metadata\\\": {},\n  \\\"includes\\\": \\\"<string>\\\",\n  \\\"excludes\\\": \\\"<string>\\\",\n  \\\"infer\\\": true,\n  \\\"custom_categories\\\": {}, \n  \\\"org_id\\\": \\\"<string>\\\",\n  \\\"project_id\\\": \\\"<string>\",\n  \\\"version\\\": \"v2\"\n}\")\n  .asString();"
       x-codegen-request-body-name: data
+      summary: Memories create
+      x-summary-source: derived
     delete:
       tags:
-      - memories
+      - Memories
       description: Delete memories by filter. At least one filter is required — previously omitting all filters silently deleted everything; now it returns a validation error.
       operationId: memories_delete_all
       parameters:
@@ -355,10 +360,12 @@ paths:
       - lang: Java
         source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/v1/memories/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
       x-codegen-request-body-name: data
+      summary: Memories delete all
+      x-summary-source: derived
   /v2/memories/:
     post:
       tags:
-      - memories
+      - Memories
       description: Get all memories.
       operationId: memories_list_v2
       requestBody:
@@ -395,11 +402,12 @@ paths:
                       title: Immutable
                       default: false
                     expiration_date:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date
                       description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
                       title: Expiration date
-                      nullable: true
                       default: null
                     organization:
                       type: string
@@ -437,19 +445,23 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\n$filters = [\n  'AND' => [\n    ['user_id' => 'alex'],\n    ['created_at' => ['gte' => '2024-07-01', 'lte' => '2024-07-31']]\n  ]\n];\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v2/memories/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"POST\",\n  CURLOPT_POSTFIELDS => json_encode(['filters' => $filters]),\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token your-api-key\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "import com.konghq.unirest.http.HttpResponse;\nimport com.konghq.unirest.http.Unirest;\nimport org.json.JSONObject;\n\nJSONObject filters = new JSONObject()\n    .put(\"AND\", new JSONArray()\n        .put(new JSONObject().put(\"user_id\", \"alex\"))\n        .put(new JSONObject().put(\"created_at\", new JSONObject()\n            .put(\"gte\", \"2024-07-01\")\n            .put(\"lte\", \"2024-07-31\")\n        ))\n    );\n\nHttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/v2/memories/\")\n  .header(\"Authorization\", \"Token your-api-key\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(new JSONObject().put(\"filters\", filters).toString())\n  .asString();\n\nSystem.out.println(response.getBody());"
+      summary: Memories list v2
+      x-summary-source: derived
   /v1/memories/events/:
     get:
       tags:
-      - memories
+      - Memories
       operationId: memories_events_list
       responses:
         '200':
           description: Successfully retrieved memory events.
           content: {}
+      summary: Memories events list
+      x-summary-source: derived
   /v1/memories/search/:
     post:
       tags:
-      - memories
+      - Memories
       description: Perform a semantic search on memories.
       operationId: memories_search_create
       requestBody:
@@ -479,8 +491,9 @@ paths:
                       type: string
                       description: The identifier of the user associated with this memory
                     metadata:
-                      type: object
-                      nullable: true
+                      type:
+                      - object
+                      - 'null'
                       description: Additional metadata associated with the memory
                     categories:
                       type: array
@@ -493,11 +506,12 @@ paths:
                       title: Immutable
                       default: false
                     expiration_date:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date
                       description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
                       title: Expiration date
-                      nullable: true
                       default: null
                     created_at:
                       type: string
@@ -552,10 +566,12 @@ paths:
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/memories/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
       x-codegen-request-body-name: data
+      summary: Memories search create
+      x-summary-source: derived
   /v2/memories/search/:
     post:
       tags:
-      - memories
+      - Memories
       description: Search memories based on a query and filters.
       operationId: memories_search_v2
       requestBody:
@@ -585,8 +601,9 @@ paths:
                       type: string
                       description: The identifier of the user associated with this memory
                     metadata:
-                      type: object
-                      nullable: true
+                      type:
+                      - object
+                      - 'null'
                       description: Additional metadata associated with the memory
                     categories:
                       type: array
@@ -599,11 +616,12 @@ paths:
                       title: Immutable
                       default: false
                     expiration_date:
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                       format: date
                       description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
                       title: Expiration date
-                      nullable: true
                       default: null
                     created_at:
                       type: string
@@ -633,10 +651,12 @@ paths:
       - lang: Java
         source: "HttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/v2/memories/search/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"query\\\": \\\"<string>\\\",\n  \\\"filters\\\": {},\n  \\\"top_k\\\": 123,\n  \\\"fields\\\": [\n    \\\"<string>\\\"\n  ],\n  \\\"rerank\\\": true,\n  \\\"org_id\\\": \\\"<string>\\\",\n  \\\"project_id\\\": \\\"<string>\\\"\n}\")\n  .asString();"
       x-codegen-request-body-name: data
+      summary: Memories search v2
+      x-summary-source: derived
   /v3/memories/:
     post:
       tags:
-      - memories
+      - Memories
       summary: Get all memories (V3, paginated)
       description: List memories scoped by filters, paginated. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. `filters` supports the same operator set as V2 search (`AND`, `OR`, `NOT`, `in`, `gte`, `lte`, etc.). Response is a paginated envelope; pass `page` and `page_size` as query parameters to step through results.
       operationId: memories_list_v3
@@ -684,14 +704,16 @@ paths:
                     type: integer
                     description: Total number of memories matching the filters.
                   next:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uri
-                    nullable: true
                     description: URL for the next page, or `null` if this is the last page.
                   previous:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: uri
-                    nullable: true
                     description: URL for the previous page, or `null` if this is the first page.
                   results:
                     type: array
@@ -772,7 +794,7 @@ paths:
   /v3/memories/add/:
     post:
       tags:
-      - memories
+      - Memories
       summary: Add memories (V3)
       description: Extract and store memories from a conversation using the V3 additive pipeline. Entity IDs (`user_id` / `agent_id` / `run_id`) are accepted at the top level. At least one entity ID is required so the memory is scoped to a session.
       operationId: memories_add_v3
@@ -868,7 +890,7 @@ paths:
   /v3/memories/search/:
     post:
       tags:
-      - memories
+      - Memories
       summary: Search memories (V3)
       description: Relevance-ranked search across stored memories. V3 uses hybrid retrieval and can also apply temporal reasoning for time-aware queries. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. At least one entity ID is required.
       operationId: memories_search_v3
@@ -911,7 +933,6 @@ paths:
                   - type: integer
                   - type: number
                   - type: string
-                  nullable: true
                   description: Optional query anchor time for relative temporal interpretation. Accepts Unix epoch, YYYY-MM-DD, or ISO datetime.
             example:
               query: where does the user live?
@@ -1001,16 +1022,18 @@ paths:
         type: string
     get:
       tags:
-      - memories
+      - Memories
       operationId: memories_entity_read
       responses:
         '200':
           description: Successfully retrieved memories.
           content: {}
+      summary: Memories entity read
+      x-summary-source: derived
   /v1/memories/{memory_id}/:
     get:
       tags:
-      - memories
+      - Memories
       description: Get a memory.
       operationId: memories_read
       parameters:
@@ -1040,16 +1063,19 @@ paths:
                     type: string
                     description: Identifier of the user associated with this memory
                   agent_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The agent ID associated with the memory, if any
                   app_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The app ID associated with the memory, if any
                   run_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The run ID associated with the memory, if any
                   hash:
                     type: string
@@ -1098,9 +1124,11 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/memories/{memory_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/memories/{memory_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Memories read
+      x-summary-source: derived
     put:
       tags:
-      - memories
+      - Memories
       description: Get or Update or delete a memory.
       operationId: memories_update
       parameters:
@@ -1139,20 +1167,24 @@ paths:
                     type: string
                     description: The updated text content of the memory
                   user_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The user ID associated with the memory, if any
                   agent_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The agent ID associated with the memory, if any
                   app_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The app ID associated with the memory, if any
                   run_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: The run ID associated with the memory, if any
                   hash:
                     type: string
@@ -1182,9 +1214,11 @@ paths:
       - lang: Java
         source: "HttpResponse<String> response = Unirest.put(\"https://api.mem0.ai/v1/memories/{memory_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\\\"text\\\": \\\"Your updated memory text here\\\", \\\"metadata\\\": {\\\"category\\\": \\\"example\\\"}}\")\n  .asString();"
       x-codegen-request-body-name: data
+      summary: Memories update
+      x-summary-source: derived
     delete:
       tags:
-      - memories
+      - Memories
       description: Get or Update or delete a memory.
       operationId: memories_delete
       parameters:
@@ -1231,10 +1265,12 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/memories/{memory_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"DELETE\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.delete(\"https://api.mem0.ai/v1/memories/{memory_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Memories delete
+      x-summary-source: derived
   /v1/memories/{memory_id}/history/:
     get:
       tags:
-      - memories
+      - Memories
       description: Retrieve the history of a memory.
       operationId: memories_history_list
       parameters:
@@ -1282,8 +1318,9 @@ paths:
                         - content
                       description: The conversation input that led to this memory change
                     old_memory:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                       description: The previous state of the memory, if applicable
                     new_memory:
                       type: string
@@ -1299,8 +1336,9 @@ paths:
                       - DELETE
                       description: The type of event that occurred
                     metadata:
-                      type: object
-                      nullable: true
+                      type:
+                      - object
+                      - 'null'
                       description: Additional metadata associated with the memory change
                     created_at:
                       type: string
@@ -1360,10 +1398,12 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/memories/{memory_id}/history/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/memories/{memory_id}/history/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Memories history list
+      x-summary-source: derived
   /v1/batch/:
     put:
       tags:
-      - memories
+      - Memories
       description: Batch update multiple memories (up to 1000) in a single API call.
       operationId: memories_batch_update
       requestBody:
@@ -1419,9 +1459,11 @@ paths:
         source: "// To use the JavaScript SDK, install the package:\n// npm i mem0ai\n\nimport MemoryClient from 'mem0ai';\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\nconst updateMemories = [\n    {\n        memoryId: \"285ed74b-6e05-4043-b16b-3abd5b533496\",\n        text: \"Watches football\"\n    },\n    {\n        memoryId: \"2c9bd859-d1b7-4d33-a6b8-94e0147c4f07\",\n        text: \"Likes to travel\"\n    }\n];\n\nclient.batchUpdate(updateMemories)\n    .then(response => console.log('Batch update response:', response))\n    .catch(error => console.error(error));"
       - lang: cURL
         source: "curl -X PUT \"https://api.mem0.ai/v1/batch/\" \\\n     -H \"Authorization: Token your-api-key\" \\\n     -H \"Content-Type: application/json\" \\\n     -d '{\n         \"memories\": [\n             {\n                 \"memory_id\": \"285ed74b-6e05-4043-b16b-3abd5b533496\",\n                 \"text\": \"Watches football\"\n             },\n             {\n                 \"memory_id\": \"2c9bd859-d1b7-4d33-a6b8-94e0147c4f07\",\n                 \"text\": \"Likes to travel\"\n             }\n         ]\n     }'"
+      summary: Memories batch update
+      x-summary-source: derived
     delete:
       tags:
-      - memories
+      - Memories
       description: Batch delete multiple memories (up to 1000) in a single API call.
       operationId: memories_batch_delete
       requestBody:
@@ -1468,8 +1510,133 @@ paths:
         source: "// To use the JavaScript SDK, install the package:\n// npm i mem0ai\n\nimport MemoryClient from 'mem0ai';\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\nconst deleteMemories = [\n    { memory_id: \"285ed74b-6e05-4043-b16b-3abd5b533496\" },\n    { memory_id: \"2c9bd859-d1b7-4d33-a6b8-94e0147c4f07\" }\n];\n\nclient.batchDelete(deleteMemories)\n    .then(response => console.log('Batch delete response:', response))\n    .catch(error => console.error(error));"
       - lang: cURL
         source: "curl -X DELETE \"https://api.mem0.ai/v1/batch/\" \\\n     -H \"Authorization: Token your-api-key\" \\\n     -H \"Content-Type: application/json\" \\\n     -d '{\n         \"memories\": [\n             {\n                 \"memory_id\": \"285ed74b-6e05-4043-b16b-3abd5b533496\"\n             },\n             {\n                 \"memory_id\": \"2c9bd859-d1b7-4d33-a6b8-94e0147c4f07\"\n             }\n         ]\n     }'"
+      summary: Memories batch delete
+      x-summary-source: derived
 components:
   schemas:
+    MemoryInput:
+      type: object
+      properties:
+        messages:
+          description: An array of message objects representing the content of the memory. Each message object typically contains 'role' and 'content' fields, where 'role' indicates the sender either 'user' or 'assistant' and 'content' contains the actual message text. This structure allows for the representation of conversations or multi-part memories.
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        agent_id:
+          description: The unique identifier of the agent associated with this memory.
+          title: Agent id
+          type:
+          - string
+          - 'null'
+        user_id:
+          description: The unique identifier of the user associated with this memory.
+          title: User id
+          type:
+          - string
+          - 'null'
+        app_id:
+          description: The unique identifier of the application associated with this memory.
+          title: App id
+          type:
+          - string
+          - 'null'
+        run_id:
+          description: The unique identifier of the run associated with this memory.
+          title: Run id
+          type:
+          - string
+          - 'null'
+        metadata:
+          description: Additional metadata associated with the memory, which can be used to store any additional information or context about the memory. Best practice for incorporating additional information is through metadata (e.g. location, time, ids, etc.). During retrieval, you can either use these metadata alongside the query to fetch relevant memories or retrieve memories based on the query first and then refine the results using metadata during post-processing.
+          title: Metadata
+          type:
+          - object
+          - 'null'
+          properties: {}
+        includes:
+          description: String to include the specific preferences in the memory.
+          title: Includes
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        excludes:
+          description: String to exclude the specific preferences in the memory.
+          title: Excludes
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        infer:
+          description: Whether to infer the memories or directly store the messages.
+          title: Infer
+          type: boolean
+          default: true
+        output_format:
+          description: 'Controls the response format structure. `v1.0` (deprecated) returns a direct array of memory objects: `[{...}, {...}]`. `v1.1` (recommended) returns an object with a ''results'' key containing the array: `{"results": [...]}`. The `v1.0` format will be removed in future versions.'
+          title: Output format
+          type:
+          - string
+          - 'null'
+          default: v1.1
+        custom_categories:
+          description: A list of categories with category name and its description.
+          title: Custom categories
+          type:
+          - object
+          - 'null'
+          properties: {}
+        custom_instructions:
+          description: Defines project-specific guidelines for handling and organizing memories. When set at the project level, they apply to all new memories in that project.
+          title: Custom instructions
+          type:
+          - string
+          - 'null'
+        immutable:
+          description: Whether the memory is immutable.
+          title: Immutable
+          type: boolean
+          default: false
+        async_mode:
+          description: Whether to add the memory completely asynchronously.
+          title: Async mode
+          type: boolean
+          default: true
+        timestamp:
+          description: 'The timestamp of the memory. Format: Unix timestamp'
+          title: Timestamp
+          type:
+          - integer
+          - 'null'
+        expiration_date:
+          description: 'The date when the memory will expire. Format: YYYY-MM-DD'
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        org_id:
+          description: The unique identifier of the organization associated with this memory.
+          title: Organization id
+          type:
+          - string
+          - 'null'
+        project_id:
+          description: The unique identifier of the project associated with this memory.
+          title: Project id
+          type:
+          - string
+          - 'null'
+        version:
+          description: The version of the memory to use. The default version is v1, which is deprecated. We recommend using v2 for new applications.
+          title: Version
+          type:
+          - string
+          - 'null'
     MemorySearchInput:
       required:
       - query
@@ -1482,29 +1649,34 @@ components:
           description: The query to search for in the memory.
         agent_id:
           title: Agent id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The agent ID associated with the memory.
         user_id:
           title: User id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The user ID associated with the memory.
         app_id:
           title: App id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The app ID associated with the memory.
         run_id:
           title: Run id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The run ID associated with the memory.
         metadata:
           title: Metadata
-          type: object
+          type:
+          - object
+          - 'null'
           properties: {}
-          nullable: true
           description: Additional metadata associated with the memory.
         top_k:
           title: Top K
@@ -1529,19 +1701,22 @@ components:
           description: Whether to search for memories based on keywords.
         output_format:
           title: Output format
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           default: v1.1
           description: 'The search method supports two output formats: `v1.0` (default) and `v1.1`. We recommend using `v1.1` as `v1.0` will be deprecated soon.'
         org_id:
           title: Organization id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the organization associated with the memory.
         project_id:
           title: Project id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the project associated with the memory.
         filter_memories:
           title: Filter memories
@@ -1559,113 +1734,6 @@ components:
           type: boolean
           default: false
           description: Whether to only search for memories based on metadata.
-    MemoryInput:
-      type: object
-      properties:
-        messages:
-          description: An array of message objects representing the content of the memory. Each message object typically contains 'role' and 'content' fields, where 'role' indicates the sender either 'user' or 'assistant' and 'content' contains the actual message text. This structure allows for the representation of conversations or multi-part memories.
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
-              nullable: true
-        agent_id:
-          description: The unique identifier of the agent associated with this memory.
-          title: Agent id
-          type: string
-          nullable: true
-        user_id:
-          description: The unique identifier of the user associated with this memory.
-          title: User id
-          type: string
-          nullable: true
-        app_id:
-          description: The unique identifier of the application associated with this memory.
-          title: App id
-          type: string
-          nullable: true
-        run_id:
-          description: The unique identifier of the run associated with this memory.
-          title: Run id
-          type: string
-          nullable: true
-        metadata:
-          description: Additional metadata associated with the memory, which can be used to store any additional information or context about the memory. Best practice for incorporating additional information is through metadata (e.g. location, time, ids, etc.). During retrieval, you can either use these metadata alongside the query to fetch relevant memories or retrieve memories based on the query first and then refine the results using metadata during post-processing.
-          title: Metadata
-          type: object
-          properties: {}
-          nullable: true
-        includes:
-          description: String to include the specific preferences in the memory.
-          title: Includes
-          minLength: 1
-          type: string
-          nullable: true
-        excludes:
-          description: String to exclude the specific preferences in the memory.
-          title: Excludes
-          minLength: 1
-          type: string
-          nullable: true
-        infer:
-          description: Whether to infer the memories or directly store the messages.
-          title: Infer
-          type: boolean
-          default: true
-        output_format:
-          description: 'Controls the response format structure. `v1.0` (deprecated) returns a direct array of memory objects: `[{...}, {...}]`. `v1.1` (recommended) returns an object with a ''results'' key containing the array: `{"results": [...]}`. The `v1.0` format will be removed in future versions.'
-          title: Output format
-          type: string
-          nullable: true
-          default: v1.1
-        custom_categories:
-          description: A list of categories with category name and its description.
-          title: Custom categories
-          type: object
-          properties: {}
-          nullable: true
-        custom_instructions:
-          description: Defines project-specific guidelines for handling and organizing memories. When set at the project level, they apply to all new memories in that project.
-          title: Custom instructions
-          type: string
-          nullable: true
-        immutable:
-          description: Whether the memory is immutable.
-          title: Immutable
-          type: boolean
-          default: false
-        async_mode:
-          description: Whether to add the memory completely asynchronously.
-          title: Async mode
-          type: boolean
-          default: true
-        timestamp:
-          description: 'The timestamp of the memory. Format: Unix timestamp'
-          title: Timestamp
-          type: integer
-          nullable: true
-        expiration_date:
-          description: 'The date when the memory will expire. Format: YYYY-MM-DD'
-          title: Expiration date
-          type: string
-          format: date
-          nullable: true
-        org_id:
-          description: The unique identifier of the organization associated with this memory.
-          title: Organization id
-          type: string
-          nullable: true
-        project_id:
-          description: The unique identifier of the project associated with this memory.
-          title: Project id
-          type: string
-          nullable: true
-        version:
-          description: The version of the memory to use. The default version is v1, which is deprecated. We recommend using v2 for new applications.
-          title: Version
-          type: string
-          nullable: true
     MemoryGetInputV2:
       type: object
       required:
@@ -1743,13 +1811,15 @@ components:
           description: 'Number of items per page. Default: 100'
         org_id:
           title: Organization id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the organization associated with the memory.
         project_id:
           title: Project id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the project associated with the memory.
     MemorySearchInputV2:
       type: object
@@ -1853,13 +1923,15 @@ components:
           description: The minimum similarity threshold for returned results.
         org_id:
           title: Organization id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the organization associated with the memory.
         project_id:
           title: Project id
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The unique identifier of the project associated with the memory.
   securitySchemes:
     ApiKeyAuth:

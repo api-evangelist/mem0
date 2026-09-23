@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents organizations API
+  title: Mem0 API Docs Organizations API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: organizations
+- name: Organizations
 paths:
   /api/v1/orgs/organizations/:
     get:
       tags:
-      - organizations
+      - Organizations
       operationId: organizations_read
       responses:
         '200':
@@ -97,9 +97,11 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Organizations read
+      x-summary-source: derived
     post:
       tags:
-      - organizations
+      - Organizations
       description: Create a new organization.
       operationId: create_organization
       requestBody:
@@ -156,10 +158,12 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"POST\",\n  CURLOPT_POSTFIELDS => \"{\n  \\\"name\\\": \\\"<string>\\\"\n}\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
+      summary: Create organization
+      x-summary-source: derived
   /api/v1/orgs/organizations/{org_id}/:
     get:
       tags:
-      - organizations
+      - Organizations
       description: Get a organization.
       operationId: get_organization
       parameters:
@@ -258,9 +262,11 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"GET\",\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "HttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/api/v1/orgs/organizations/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\\n  \\\"name\\\": \\\"<string>\\\"\\n}\")\n  .asString();"
+      summary: Get organization
+      x-summary-source: derived
     delete:
       tags:
-      - organizations
+      - Organizations
       summary: Delete an organization
       description: Delete an organization by its ID.
       operationId: delete_organization
@@ -330,7 +336,7 @@ paths:
   /api/v1/orgs/organizations/{org_id}/members/:
     get:
       tags:
-      - organizations
+      - Organizations
       summary: Get organization members
       description: Retrieve a list of members for a specific organization.
       operationId: get_organization_members
@@ -398,7 +404,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
     put:
       tags:
-      - organizations
+      - Organizations
       summary: Update organization member role
       description: Update the role of an existing member in a specific organization.
       operationId: update_organization_member_role
@@ -475,7 +481,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.put(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\")\n  .asString();"
     post:
       tags:
-      - organizations
+      - Organizations
       summary: Add organization member
       description: Add a new member to a specific organization.
       operationId: add_organization_member
@@ -552,7 +558,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
     delete:
       tags:
-      - organizations
+      - Organizations
       summary: Remove a member from the organization
       operationId: remove_organization_member
       parameters:

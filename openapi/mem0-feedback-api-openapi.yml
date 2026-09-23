@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents feedback API
+  title: Mem0 API Docs Feedback API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: feedback
+- name: Feedback
 paths:
   /v1/feedback/:
     post:
       tags:
-      - feedback
+      - Feedback
       description: Submit feedback for a memory.
       operationId: submit_feedback
       requestBody:
@@ -32,16 +32,18 @@ paths:
                   type: string
                   description: ID of the memory to provide feedback for
                 feedback:
-                  type: string
+                  type:
+                  - string
+                  - 'null'
                   enum:
                   - POSITIVE
                   - NEGATIVE
                   - VERY_NEGATIVE
-                  nullable: true
                   description: Type of feedback
                 feedback_reason:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: Reason for the feedback
         required: true
       responses:
@@ -57,16 +59,18 @@ paths:
                     format: uuid
                     description: Feedback ID
                   feedback:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     enum:
                     - POSITIVE
                     - NEGATIVE
                     - VERY_NEGATIVE
-                    nullable: true
                     description: Type of feedback
                   feedback_reason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Reason for the feedback
         '400':
           description: Invalid request
@@ -93,6 +97,8 @@ paths:
         source: "// To use the JavaScript SDK, install the package:\n// npm install mem0ai\n\nimport MemoryClient from 'mem0ai';\n\nconst client = new MemoryClient({ apiKey: 'your-api-key'});\n\nclient.feedback({\n    memory_id: \"your-memory-id\", \n    feedback: \"NEGATIVE\", \n    feedback_reason: \"I don't like this memory because it is not relevant.\"\n})"
       - lang: cURL
         source: "curl --request POST \\\n  --url https://api.mem0.ai/v1/feedback/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\"memory_id\": \"memory_id\", \"feedback\": \"POSITIVE\"}'"
+      summary: Submit feedback
+      x-summary-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

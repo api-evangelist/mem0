@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents exports API
+  title: Mem0 API Docs Exports API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: exports
+- name: Exports
 paths:
   /v1/exports/:
     post:
       tags:
-      - exports
+      - Exports
       summary: Create an export job with schema
       description: Create a structured export of memories based on a provided schema.
       operationId: exports_create
@@ -95,7 +95,7 @@ paths:
   /v1/exports/get:
     post:
       tags:
-      - exports
+      - Exports
       summary: Export data based on filters
       description: Get the latest memory export.
       operationId: exports_list

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents projects API
+  title: Mem0 API Docs Projects API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: projects
+- name: Projects
 paths:
   /api/v1/orgs/organizations/{org_id}/projects/:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get projects
       description: Retrieve a list of projects for a specific organization.
       operationId: get_projects
@@ -97,7 +97,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/projects/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
     post:
       tags:
-      - projects
+      - Projects
       summary: Create project
       description: Create a new project within an organization.
       operationId: create_project
@@ -171,7 +171,7 @@ paths:
   /api/v1/orgs/organizations/{org_id}/projects/{project_id}/:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get project details
       description: Retrieve details of a specific project within an organization.
       operationId: get_project
@@ -266,7 +266,7 @@ paths:
         source: "// To use the Java SDK, add this dependency to your pom.xml:\n// <dependency>\n//     <groupId>ai.mem0</groupId>\n//     <artifactId>mem0-java</artifactId>\n//     <version>1.0.0</version>\n// </dependency>\n\nimport ai.mem0.MemoryClient;\n\npublic class Example {\n    public static void main(String[] args) {\n        MemoryClient client = new MemoryClient(\"your-api-key\");\n        \n        try {\n            Object response = client.getProject();\n            System.out.println(response);\n        } catch (Exception e) {\n            System.err.println(\"Error: \" + e.getMessage());\n        }\n    }\n}"
     patch:
       tags:
-      - projects
+      - Projects
       summary: Update Project
       description: Update a specific project's settings.
       operationId: update_project
@@ -344,7 +344,7 @@ paths:
         source: "// To use the Java SDK, add this dependency to your pom.xml:\n// <dependency>\n//     <groupId>ai.mem0</groupId>\n//     <artifactId>mem0-java</artifactId>\n//     <version>1.0.0</version>\n// </dependency>\n\nimport ai.mem0.MemoryClient;\nimport java.util.*;\n\npublic class Example {\n    public static void main(String[] args) {\n        MemoryClient client = new MemoryClient(\"your-api-key\");\n        \n        List<Map<String, String>> newCategories = Arrays.asList(\n            Collections.singletonMap(\"cooking\", \"For users interested in cooking and culinary experiences\"),\n            Collections.singletonMap(\"fitness\", \"Includes content related to fitness and workouts\")\n        );\n        \n        try {\n            Map<String, Object> params = new HashMap<>();\n            params.put(\"custom_categories\", newCategories);\n            \n            Object response = client.updateProject(params);\n            System.out.println(response);\n        } catch (Exception e) {\n            System.err.println(\"Error: \" + e.getMessage());\n        }\n    }\n}"
     delete:
       tags:
-      - projects
+      - Projects
       summary: Delete Project
       description: Delete a specific project and its related data.
       operationId: delete_project
@@ -420,7 +420,7 @@ paths:
   /api/v1/orgs/organizations/{org_id}/projects/{project_id}/members/:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get Project Members
       description: Retrieve a list of members for a specific project.
       operationId: get_project_members
@@ -491,7 +491,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/projects/{project_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
     post:
       tags:
-      - projects
+      - Projects
       summary: Add member to project
       description: Add a new member to a specific project within an organization.
       operationId: add_project_member
@@ -570,7 +570,7 @@ paths:
         source: "HttpResponse<String> response = Unirest.post(\"https://api.mem0.ai/api/v1/orgs/organizations/{org_id}/projects/{project_id}/members/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(\"{\n  \\\"email\\\": \\\"<string>\\\",\n  \\\"role\\\": \\\"<string>\\\"\n}\")\n  .asString();"
     put:
       tags:
-      - projects
+      - Projects
       summary: Update project member role
       description: Update the role of a member in a specific project within an organization.
       operationId: update_project_member

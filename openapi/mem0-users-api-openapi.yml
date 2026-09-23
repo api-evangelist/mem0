@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents users API
+  title: Mem0 API Docs Users API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: users
+- name: Users
 paths:
   /v1/users/:
     post:
       tags:
-      - users
+      - Users
       description: Create a new User.
       operationId: users_create
       requestBody:
@@ -34,6 +34,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateUser'
       x-codegen-request-body-name: data
+      summary: Users create
+      x-summary-source: derived
 components:
   schemas:
     CreateUser:

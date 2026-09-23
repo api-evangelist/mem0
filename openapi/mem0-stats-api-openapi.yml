@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents stats API
+  title: Mem0 API Docs Stats API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,13 +12,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: stats
+- name: Stats
 paths:
   /v1/stats/:
     get:
       tags:
-      - stats
-      summary: Retrieve memory-related statistics for the authenticated user.
+      - Stats
+      summary: Retrieve memory-related statistics for the authenticated user
       description: 'This endpoint returns the following statistics:
 
         - Total number of memories created

@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents Project API
+  title: Mem0 API Docs Project API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai

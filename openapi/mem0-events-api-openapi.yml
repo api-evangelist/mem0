@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents events API
+  title: Mem0 API Docs Events API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,13 +12,13 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: events
+- name: Events
 paths:
   /v1/events/:
     get:
       tags:
-      - events
-      summary: Retrieve all events for current organization and project.
+      - Events
+      summary: Retrieve all events for current organization and project
       operationId: events_list
       responses:
         '200':
@@ -32,12 +32,14 @@ paths:
                     type: integer
                     description: Total number of events matching the filters.
                   next:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: URL for the next page of results.
                   previous:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: URL for the previous page of results.
                   results:
                     type: array
@@ -64,8 +66,9 @@ paths:
                           type: object
                           description: The original payload associated with the event.
                         metadata:
-                          type: object
-                          nullable: true
+                          type:
+                          - object
+                          - 'null'
                           description: Additional metadata associated with the event.
                         results:
                           type: array
@@ -120,8 +123,8 @@ paths:
   /v1/event/{event_id}/:
     get:
       tags:
-      - events
-      summary: Retrieve details of a specific event by its ID.
+      - Events
+      summary: Retrieve details of a specific event by its ID
       operationId: event_read
       parameters:
       - name: event_id
@@ -158,8 +161,9 @@ paths:
                     type: object
                     description: The original payload associated with the event.
                   metadata:
-                    type: object
-                    nullable: true
+                    type:
+                    - object
+                    - 'null'
                     description: Additional metadata associated with the event.
                   results:
                     type: array

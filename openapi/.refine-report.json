@@ -1,22 +1,10 @@
 {
   "provider": "mem0",
   "sources": [
-    "mem0-agents-api-openapi.yml",
-    "mem0-apps-api-openapi.yml",
-    "mem0-entities-api-openapi.yml",
-    "mem0-events-api-openapi.yml",
-    "mem0-exports-api-openapi.yml",
-    "mem0-feedback-api-openapi.yml",
-    "mem0-memories-api-openapi.yml",
-    "mem0-organizations-api-openapi.yml",
-    "mem0-project-api-openapi.yml",
-    "mem0-projects-api-openapi.yml",
-    "mem0-runs-api-openapi.yml",
-    "mem0-stats-api-openapi.yml",
-    "mem0-users-api-openapi.yml",
-    "mem0-webhooks-api-openapi.yml"
+    "_original/mem0-openapi.json"
   ],
   "outputs": [
+    "mem0-project-api-openapi.yml",
     "mem0-agents-api-openapi.yml",
     "mem0-apps-api-openapi.yml",
     "mem0-entities-api-openapi.yml",
@@ -25,7 +13,6 @@
     "mem0-feedback-api-openapi.yml",
     "mem0-memories-api-openapi.yml",
     "mem0-organizations-api-openapi.yml",
-    "mem0-project-api-openapi.yml",
     "mem0-projects-api-openapi.yml",
     "mem0-runs-api-openapi.yml",
     "mem0-stats-api-openapi.yml",
@@ -35,6 +22,39 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "mem0-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "mem0-openapi.json: declared missing tag: Project",
+    "mem0-openapi.json: declared missing tag: agents",
+    "mem0-openapi.json: declared missing tag: apps",
+    "mem0-openapi.json: declared missing tag: entities",
+    "mem0-openapi.json: declared missing tag: events",
+    "mem0-openapi.json: declared missing tag: exports",
+    "mem0-openapi.json: declared missing tag: feedback",
+    "mem0-openapi.json: declared missing tag: memories",
+    "mem0-openapi.json: declared missing tag: organizations",
+    "mem0-openapi.json: declared missing tag: projects",
+    "mem0-openapi.json: declared missing tag: runs",
+    "mem0-openapi.json: declared missing tag: stats",
+    "mem0-openapi.json: declared missing tag: users",
+    "mem0-openapi.json: declared missing tag: webhooks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "mem0-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-entities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-exports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-memories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-project-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-stats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "mem0-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

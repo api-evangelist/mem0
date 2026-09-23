@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Mem0 API Docs agents apps API
+  title: Mem0 API Docs Apps API
   description: mem0.ai API Docs
   contact:
     email: support@mem0.ai
@@ -12,12 +12,12 @@ servers:
 security:
 - ApiKeyAuth: []
 tags:
-- name: apps
+- name: Apps
 paths:
   /v1/apps/:
     post:
       tags:
-      - apps
+      - Apps
       description: Create a new App.
       operationId: apps_create
       requestBody:
@@ -34,6 +34,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateApp'
       x-codegen-request-body-name: data
+      summary: Apps create
+      x-summary-source: derived
 components:
   schemas:
     CreateApp:
