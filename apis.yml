@@ -55,7 +55,7 @@ tags:
   - CrewAI
   - AutoGen
   - LlamaIndex
-  - Open-Source
+  - Open Source
   - Infrastructure
 tags_raw:
   - Memory
@@ -71,6 +71,7 @@ tags_raw:
   - LlamaIndex
   - Open Source
   - Infrastructure
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/mem0/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-23'
@@ -169,7 +170,7 @@ apis:
   - type: API Key
     description: Authenticate with a project API key in the Authorization header (Token scheme).
 - aid: mem0:mem0-agents-api
-  name: Mem0 agents API
+  name: Mem0 Agents API
   description: The agents API from Mem0 — 1 operation(s) for agents.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -181,7 +182,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-agents-api-openapi.yml
 - aid: mem0:mem0-apps-api
-  name: Mem0 apps API
+  name: Mem0 Apps API
   description: The apps API from Mem0 — 1 operation(s) for apps.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -193,7 +194,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-apps-api-openapi.yml
 - aid: mem0:mem0-entities-api
-  name: Mem0 entities API
+  name: Mem0 Entities API
   description: The entities API from Mem0 — 3 operation(s) for entities.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -205,7 +206,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-entities-api-openapi.yml
 - aid: mem0:mem0-events-api
-  name: Mem0 events API
+  name: Mem0 Events API
   description: The events API from Mem0 — 2 operation(s) for events.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -217,7 +218,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-events-api-openapi.yml
 - aid: mem0:mem0-exports-api
-  name: Mem0 exports API
+  name: Mem0 Exports API
   description: The exports API from Mem0 — 2 operation(s) for exports.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -229,7 +230,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-exports-api-openapi.yml
 - aid: mem0:mem0-feedback-api
-  name: Mem0 feedback API
+  name: Mem0 Feedback API
   description: The feedback API from Mem0 — 1 operation(s) for feedback.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -241,7 +242,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-feedback-api-openapi.yml
 - aid: mem0:mem0-memories-api
-  name: Mem0 memories API
+  name: Mem0 Memories API
   description: The memories API from Mem0 — 12 operation(s) for memories.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -253,7 +254,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-memories-api-openapi.yml
 - aid: mem0:mem0-organizations-api
-  name: Mem0 organizations API
+  name: Mem0 Organizations API
   description: The organizations API from Mem0 — 3 operation(s) for organizations.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -275,7 +276,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-project-api-openapi.yml
 - aid: mem0:mem0-projects-api
-  name: Mem0 projects API
+  name: Mem0 Projects API
   description: The projects API from Mem0 — 3 operation(s) for projects.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -287,7 +288,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-projects-api-openapi.yml
 - aid: mem0:mem0-runs-api
-  name: Mem0 runs API
+  name: Mem0 Runs API
   description: The runs API from Mem0 — 1 operation(s) for runs.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -299,7 +300,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-runs-api-openapi.yml
 - aid: mem0:mem0-stats-api
-  name: Mem0 stats API
+  name: Mem0 Stats API
   description: The stats API from Mem0 — 1 operation(s) for stats.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -311,7 +312,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-stats-api-openapi.yml
 - aid: mem0:mem0-users-api
-  name: Mem0 users API
+  name: Mem0 Users API
   description: The users API from Mem0 — 1 operation(s) for users.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai
@@ -323,7 +324,7 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-users-api-openapi.yml
 - aid: mem0:mem0-webhooks-api
-  name: Mem0 webhooks API
+  name: Mem0 Webhooks API
   description: The webhooks API from Mem0 — 2 operation(s) for webhooks.
   humanURL: https://docs.mem0.ai/api-reference
   baseURL: https://api.mem0.ai

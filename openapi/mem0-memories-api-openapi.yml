@@ -1637,6 +1637,93 @@ components:
           type:
           - string
           - 'null'
+    MemoryGetInputV2:
+      type: object
+      required:
+      - filters
+      properties:
+        filters:
+          title: Filters
+          type: object
+          description: 'A dictionary of filters to apply to retrieve memories. Available fields are: user_id, agent_id, app_id, run_id, created_at, updated_at, categories, keywords. Supports logical operators (AND, OR) and comparison operators (in, gte, lte, gt, lt, ne, contains, icontains, *). For categories field, use ''contains'' for partial matching (e.g., {"categories": {"contains": "finance"}}) or ''in'' for exact matching (e.g., {"categories": {"in": ["personal_information"]}}).'
+          properties:
+            user_id:
+              type: string
+            agent_id:
+              type: string
+            app_id:
+              type: string
+            run_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            keywords:
+              type: object
+              properties:
+                contains:
+                  type: string
+                icontains:
+                  type: string
+            categories:
+              type: object
+              properties:
+                in:
+                  type: array
+                  items:
+                    type: string
+            metadata:
+              type: object
+          additionalProperties:
+            type: object
+            properties:
+              in:
+                type: array
+              gte:
+                type: string
+              lte:
+                type: string
+              gt:
+                type: string
+              lt:
+                type: string
+              ne:
+                type: string
+              contains:
+                type: string
+              icontains:
+                type: string
+        fields:
+          title: Fields
+          type: array
+          items:
+            type: string
+          description: A list of field names to include in the response. If not provided, all fields will be returned.
+        page:
+          title: Page
+          type: integer
+          default: 1
+          description: 'Page number for pagination. Default: 1'
+        page_size:
+          title: Page Size
+          type: integer
+          default: 100
+          description: 'Number of items per page. Default: 100'
+        org_id:
+          title: Organization id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the organization associated with the memory.
+        project_id:
+          title: Project id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the project associated with the memory.
     MemorySearchInput:
       required:
       - query
@@ -1734,93 +1821,6 @@ components:
           type: boolean
           default: false
           description: Whether to only search for memories based on metadata.
-    MemoryGetInputV2:
-      type: object
-      required:
-      - filters
-      properties:
-        filters:
-          title: Filters
-          type: object
-          description: 'A dictionary of filters to apply to retrieve memories. Available fields are: user_id, agent_id, app_id, run_id, created_at, updated_at, categories, keywords. Supports logical operators (AND, OR) and comparison operators (in, gte, lte, gt, lt, ne, contains, icontains, *). For categories field, use ''contains'' for partial matching (e.g., {"categories": {"contains": "finance"}}) or ''in'' for exact matching (e.g., {"categories": {"in": ["personal_information"]}}).'
-          properties:
-            user_id:
-              type: string
-            agent_id:
-              type: string
-            app_id:
-              type: string
-            run_id:
-              type: string
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            keywords:
-              type: object
-              properties:
-                contains:
-                  type: string
-                icontains:
-                  type: string
-            categories:
-              type: object
-              properties:
-                in:
-                  type: array
-                  items:
-                    type: string
-            metadata:
-              type: object
-          additionalProperties:
-            type: object
-            properties:
-              in:
-                type: array
-              gte:
-                type: string
-              lte:
-                type: string
-              gt:
-                type: string
-              lt:
-                type: string
-              ne:
-                type: string
-              contains:
-                type: string
-              icontains:
-                type: string
-        fields:
-          title: Fields
-          type: array
-          items:
-            type: string
-          description: A list of field names to include in the response. If not provided, all fields will be returned.
-        page:
-          title: Page
-          type: integer
-          default: 1
-          description: 'Page number for pagination. Default: 1'
-        page_size:
-          title: Page Size
-          type: integer
-          default: 100
-          description: 'Number of items per page. Default: 100'
-        org_id:
-          title: Organization id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the organization associated with the memory.
-        project_id:
-          title: Project id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the project associated with the memory.
     MemorySearchInputV2:
       type: object
       required:
