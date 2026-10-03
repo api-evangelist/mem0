@@ -1514,6 +1514,103 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MemorySearchInput:
+      required:
+      - query
+      type: object
+      properties:
+        query:
+          title: Query
+          minLength: 1
+          type: string
+          description: The query to search for in the memory.
+        agent_id:
+          title: Agent id
+          type:
+          - string
+          - 'null'
+          description: The agent ID associated with the memory.
+        user_id:
+          title: User id
+          type:
+          - string
+          - 'null'
+          description: The user ID associated with the memory.
+        app_id:
+          title: App id
+          type:
+          - string
+          - 'null'
+          description: The app ID associated with the memory.
+        run_id:
+          title: Run id
+          type:
+          - string
+          - 'null'
+          description: The run ID associated with the memory.
+        metadata:
+          title: Metadata
+          type:
+          - object
+          - 'null'
+          properties: {}
+          description: Additional metadata associated with the memory.
+        top_k:
+          title: Top K
+          type: integer
+          default: 10
+          description: The number of top results to return.
+        fields:
+          title: Fields
+          type: array
+          items:
+            type: string
+          description: A list of field names to include in the response. If not provided, all fields will be returned.
+        rerank:
+          title: Rerank
+          type: boolean
+          default: false
+          description: Whether to rerank the memories.
+        keyword_search:
+          title: Keyword search
+          type: boolean
+          default: false
+          description: Whether to search for memories based on keywords.
+        output_format:
+          title: Output format
+          type:
+          - string
+          - 'null'
+          default: v1.1
+          description: 'The search method supports two output formats: `v1.0` (default) and `v1.1`. We recommend using `v1.1` as `v1.0` will be deprecated soon.'
+        org_id:
+          title: Organization id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the organization associated with the memory.
+        project_id:
+          title: Project id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the project associated with the memory.
+        filter_memories:
+          title: Filter memories
+          type: boolean
+          default: false
+          description: Whether to properly filter the memories according to the input.
+        categories:
+          title: Categories
+          type: array
+          items:
+            type: string
+          description: A list of categories to filter the memories by.
+        only_metadata_based_search:
+          title: Only metadata based search
+          type: boolean
+          default: false
+          description: Whether to only search for memories based on metadata.
     MemoryInput:
       type: object
       properties:
@@ -1724,103 +1821,6 @@ components:
           - string
           - 'null'
           description: The unique identifier of the project associated with the memory.
-    MemorySearchInput:
-      required:
-      - query
-      type: object
-      properties:
-        query:
-          title: Query
-          minLength: 1
-          type: string
-          description: The query to search for in the memory.
-        agent_id:
-          title: Agent id
-          type:
-          - string
-          - 'null'
-          description: The agent ID associated with the memory.
-        user_id:
-          title: User id
-          type:
-          - string
-          - 'null'
-          description: The user ID associated with the memory.
-        app_id:
-          title: App id
-          type:
-          - string
-          - 'null'
-          description: The app ID associated with the memory.
-        run_id:
-          title: Run id
-          type:
-          - string
-          - 'null'
-          description: The run ID associated with the memory.
-        metadata:
-          title: Metadata
-          type:
-          - object
-          - 'null'
-          properties: {}
-          description: Additional metadata associated with the memory.
-        top_k:
-          title: Top K
-          type: integer
-          default: 10
-          description: The number of top results to return.
-        fields:
-          title: Fields
-          type: array
-          items:
-            type: string
-          description: A list of field names to include in the response. If not provided, all fields will be returned.
-        rerank:
-          title: Rerank
-          type: boolean
-          default: false
-          description: Whether to rerank the memories.
-        keyword_search:
-          title: Keyword search
-          type: boolean
-          default: false
-          description: Whether to search for memories based on keywords.
-        output_format:
-          title: Output format
-          type:
-          - string
-          - 'null'
-          default: v1.1
-          description: 'The search method supports two output formats: `v1.0` (default) and `v1.1`. We recommend using `v1.1` as `v1.0` will be deprecated soon.'
-        org_id:
-          title: Organization id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the organization associated with the memory.
-        project_id:
-          title: Project id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the project associated with the memory.
-        filter_memories:
-          title: Filter memories
-          type: boolean
-          default: false
-          description: Whether to properly filter the memories according to the input.
-        categories:
-          title: Categories
-          type: array
-          items:
-            type: string
-          description: A list of categories to filter the memories by.
-        only_metadata_based_search:
-          title: Only metadata based search
-          type: boolean
-          default: false
-          description: Whether to only search for memories based on metadata.
     MemorySearchInputV2:
       type: object
       required:
