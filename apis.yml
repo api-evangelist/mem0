@@ -336,6 +336,9 @@ apis:
   - type: OpenAPI
     url: openapi/mem0-webhooks-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/mem0-capability-edges.yml
+    name: Mem0 Business Capability Map
   - type: IssueTracker
     url: https://github.com/mem0ai/mem0/issues
   - type: Releases
