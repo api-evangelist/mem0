@@ -61,3 +61,22 @@ plans:
 references:
 - name: Mem0 API Documentation
   url: https://raw.githubusercontent.com/api-evangelist/mem0/refs/heads/main/apis.yml
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units:
+  - rate
+  - request
+  plans:
+  - name: Free
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - rate
+    - request
+    periods:
+    - minute
+    - month
