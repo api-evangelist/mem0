@@ -43,6 +43,9 @@ accessModel:
 position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/mem0.png
+x-docs-platform: mintlify
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-04
 tags:
   - Memory
   - AI Agents
@@ -55,7 +58,7 @@ tags:
   - CrewAI
   - AutoGen
   - LlamaIndex
-  - Open-Source
+  - Open Source
   - Infrastructure
 tags_raw:
   - Memory
