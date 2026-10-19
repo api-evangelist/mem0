@@ -338,6 +338,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/mem0-webhooks-api-openapi.yml
+- aid: mem0:mem0-dream-api
+  name: Mem0 Dream API
+  description: The dream API from Mem0 — 7 operation(s) for dream.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - dream
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-dream-api-openapi.yml
+- aid: mem0:mem0-profiles-api
+  name: Mem0 Profiles API
+  description: The profiles API from Mem0 — 4 operation(s) for profiles.
+  humanURL: https://docs.mem0.ai/api-reference
+  baseURL: https://api.mem0.ai
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/mem0-profiles-api-openapi.yml
 common:
   - type: Plans
     url: plans/mem0-plans-pricing.yml

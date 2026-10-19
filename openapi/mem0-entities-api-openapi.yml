@@ -36,52 +36,79 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: Unique identifier for the entity.
-                    name:
-                      type: string
-                      description: Name of the entity.
-                    created_at:
-                      type: string
-                      format: date-time
-                      description: Timestamp of when the entity was created.
-                    updated_at:
-                      type: string
-                      format: date-time
-                      description: Timestamp of when the entity was last updated.
-                    total_memories:
-                      type: integer
-                      description: Total number of memories associated with the entity.
-                    owner:
-                      type: string
-                      description: Owner of the entity.
-                    organization:
-                      type: string
-                      description: Organization the entity belongs to.
-                    metadata:
-                      type: object
-                      description: Additional metadata associated with the entity
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Total number of entities matching the filters.
+                  next:
                     type:
-                      type: string
-                      enum:
-                      - user
-                      - agent
-                      - app
-                      - run
-                  required:
-                  - id
-                  - name
-                  - created_at
-                  - updated_at
-                  - total_memories
-                  - owner
-                  - organization
-                  - type
+                    - string
+                    - 'null'
+                    description: URL of the next page of results, or null if this is the last page.
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                    description: URL of the previous page of results, or null if this is the first page.
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier for the entity.
+                        name:
+                          type: string
+                          description: Name of the entity.
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp of when the entity was created.
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp of when the entity was last updated.
+                        owner:
+                          type: string
+                          description: Owner of the entity.
+                        metadata:
+                          type:
+                          - object
+                          - 'null'
+                          description: Additional metadata associated with the entity.
+                        type:
+                          type: string
+                          enum:
+                          - user
+                          - agent
+                          - app
+                          - run
+                      required:
+                      - id
+                      - name
+                      - created_at
+                      - updated_at
+                      - owner
+                      - type
+                  total_users:
+                    type: integer
+                    description: Total number of user entities in the project.
+                  total_agents:
+                    type: integer
+                    description: Total number of agent entities in the project.
+                  total_apps:
+                    type: integer
+                    description: Total number of app entities in the project.
+                  total_runs:
+                    type: integer
+                    description: Total number of run entities in the project.
+                required:
+                - count
+                - next
+                - previous
+                - results
       x-code-samples:
       - lang: Python
         source: '# To use the Python SDK, install the package:
@@ -116,8 +143,112 @@ paths:
       responses:
         '200':
           description: Successfully retrieved entity filters.
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event_type:
+                    type: array
+                    items:
+                      type: string
+                    description: Event types that can be filtered on.
+                    example:
+                    - ADD
+                    - UPDATE
+                    - DELETE
+                    - SEARCH
+                    - GET_ALL
+                    - GET
+                    - DELETE_ALL
+                    - DELETE_USER
+                  categories:
+                    type: array
+                    items: {}
+                    description: Memory categories that can be filtered on.
+                  users:
+                    type: array
+                    items:
+                      type: string
+                    description: User IDs that can be filtered on.
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        label:
+                          type: string
+                        type:
+                          type: string
+                        placeholder:
+                          type: string
+                        options:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                              label:
+                                type: string
+                    description: Filter UI field definitions used by the Mem0 dashboard.
       summary: Entities filters list
+      x-summary-source: derived
+  /v1/entities/{entity_type}/{entity_id}/:
+    delete:
+      tags:
+      - Entities
+      deprecated: true
+      description: Delete an entity by its numeric ID. Deprecated in favor of `DELETE /v2/entities/{entity_type}/{entity_id}/`, which takes the entity's string name instead of this numeric ID.
+      operationId: entities_delete_v1
+      parameters:
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - user
+          - agent
+          - app
+          - run
+        description: The type of the entity (user, agent, app, or run).
+      - name: entity_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: The numeric identifier of the entity, as returned in the `id` field by `GET /v1/entities/`.
+      responses:
+        '200':
+          description: Entity deletion has been queued for background (async) execution.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Delete in progress. This may take some time.
+                  event_id:
+                    type: string
+                    format: uuid
+        '400':
+          description: Invalid entity ID. The path parameter must be an integer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid entity ID. Must be an integer.
+      x-code-samples:
+      - lang: cURL
+        source: "curl --request DELETE \\\n  --url https://api.mem0.ai/v1/entities/user/12345/ \\\n  --header 'Authorization: Token <api-key>'"
+      summary: Entities delete v1
       x-summary-source: derived
   /v2/entities/{entity_type}/{entity_id}/:
     get:
@@ -145,7 +276,31 @@ paths:
       responses:
         '200':
           description: Successfully retrieved entity details.
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+                    owner:
+                      type: string
+                    metadata:
+                      type:
+                      - object
+                      - 'null'
+                    type:
+                      type: string
       summary: Entities read
       x-summary-source: derived
     delete:
@@ -171,8 +326,8 @@ paths:
           type: string
         description: The unique identifier of the entity.
       responses:
-        '204':
-          description: Entity deleted successfully!
+        '200':
+          description: Entity deletion has been queued for background (async) execution.
           content:
             application/json:
               schema:
@@ -180,7 +335,10 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Entity deleted successfully!
+                    example: Delete in progress. This may take some time.
+                  event_id:
+                    type: string
+                    format: uuid
         '400':
           description: Invalid entity type.
           content:

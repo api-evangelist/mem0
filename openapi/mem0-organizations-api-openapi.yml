@@ -29,33 +29,12 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
-                      type: integer
-                      description: Unique identifier for the organization.
                     org_id:
                       type: string
                       description: Organization's unique string identifier.
                     name:
                       type: string
                       description: Name of the organization.
-                    description:
-                      type: string
-                      description: Brief description of the organization
-                    address:
-                      type: string
-                      description: Physical address of the organization
-                    contact_email:
-                      type: string
-                      description: Primary contact email for the organization
-                    phone_number:
-                      type: string
-                      description: Contact phone number for the organization
-                    website:
-                      type: string
-                      description: Official website URL of the organization
-                    on_paid_plan:
-                      type: boolean
-                      description: Indicates whether the organization is on a paid plan
                     created_at:
                       type: string
                       format: date-time
@@ -64,14 +43,37 @@ paths:
                       type: string
                       format: date-time
                       description: Timestamp of when the organization was last updated.
-                    owner:
-                      type: integer
-                      description: Identifier of the organization's owner
                     members:
                       type: array
                       items:
-                        type: integer
-                      description: List of member identifiers belonging to the organization.
+                        type: object
+                        properties:
+                          username:
+                            type: string
+                          role:
+                            type: string
+                          email:
+                            type: string
+                      description: Members belonging to the organization.
+                    is_default:
+                      type: boolean
+                      description: Whether this is the caller's default organization.
+                    byok_enabled:
+                      type: boolean
+                      description: Whether bring-your-own-key is enabled for the organization.
+                    invitations:
+                      type: array
+                      items: {}
+                      description: Pending invitations for the organization.
+                    owner_pricing_plan:
+                      type: string
+                      description: Pricing plan of the organization owner.
+                    is_owner:
+                      type: boolean
+                      description: Whether the caller owns the organization.
+                    user_role:
+                      type: string
+                      description: The caller's role within the organization.
       x-code-samples:
       - lang: Python
         source: 'import requests
@@ -182,35 +184,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: integer
-                    description: Unique identifier for the organization.
                   org_id:
                     type: string
-                    description: Unique organization ID
+                    description: Organization's unique string identifier.
                   name:
                     type: string
                     description: Name of the organization.
-                  description:
-                    type: string
-                    description: Description of the organization
-                  address:
-                    type: string
-                    description: Address of the organization
-                  contact_email:
-                    type: string
-                    format: email
-                    description: Contact email for the organization
-                  phone_number:
-                    type: string
-                    description: Phone number of the organization
-                  website:
-                    type: string
-                    format: uri
-                    description: Website of the organization
-                  on_paid_plan:
-                    type: boolean
-                    description: Indicates if the organization is on a paid plan
                   created_at:
                     type: string
                     format: date-time
@@ -219,14 +198,37 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp of when the organization was last updated.
-                  owner:
-                    type: integer
-                    description: Identifier of the organization's owner
                   members:
                     type: array
                     items:
-                      type: integer
-                    description: List of member identifiers belonging to the organization.
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                        role:
+                          type: string
+                        email:
+                          type: string
+                    description: Members belonging to the organization.
+                  is_default:
+                    type: boolean
+                    description: Whether this is the caller's default organization.
+                  byok_enabled:
+                    type: boolean
+                    description: Whether bring-your-own-key is enabled for the organization.
+                  invitations:
+                    type: array
+                    items: {}
+                    description: Pending invitations for the organization.
+                  owner_pricing_plan:
+                    type: string
+                    description: Pricing plan of the organization owner.
+                  is_owner:
+                    type: boolean
+                    description: Whether the caller owns the organization.
+                  user_role:
+                    type: string
+                    description: The caller's role within the organization.
         '404':
           description: Organization not found.
           content:

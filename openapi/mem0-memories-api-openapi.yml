@@ -20,6 +20,7 @@ paths:
       - Memories
       description: Get all memories.
       operationId: memories_list
+      deprecated: true
       parameters:
       - name: user_id
         in: query
@@ -87,6 +88,12 @@ paths:
         schema:
           type: integer
         description: 'Number of items per page. Default: 100.'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          maximum: 200
+        description: 'Maximum number of memories to return. Maximum accepted value: 200. Ignored when both `page` and `page_size` are supplied.'
       - name: start_date
         in: query
         schema:
@@ -103,67 +110,176 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
+                oneOf:
+                - type: array
+                  description: Returned when the `page` and `page_size` query parameters are not both supplied.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      memory:
+                        type: string
+                      user_id:
+                        type:
+                        - string
+                        - 'null'
+                        description: ID of the user this memory belongs to, if scoped to a user.
+                      metadata:
+                        type:
+                        - object
+                        - 'null'
+                        additionalProperties: true
+                        description: User-supplied metadata attached to the memory.
+                      categories:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+                      expiration_date:
+                        type:
+                        - string
+                        - 'null'
+                        format: date
+                        description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                        default: null
+                      structured_attributes:
+                        type:
+                        - object
+                        - 'null'
+                        additionalProperties: true
+                        description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                      replaced_by:
+                        type:
+                        - string
+                        - 'null'
+                        description: ID of the memory that superseded this one, if any.
+                      synthesized:
+                        type: boolean
+                        description: Whether this memory was synthesized rather than directly extracted.
+                      lifecycle_state:
+                        type: string
+                        description: Lifecycle state of the memory.
+                    required:
+                    - id
+                    - memory
+                    - created_at
+                    - updated_at
+                - type: object
+                  description: Returned when both the `page` and `page_size` query parameters are supplied.
                   properties:
-                    id:
-                      type: string
-                    memory:
-                      type: string
-                    input:
+                    count:
+                      type: integer
+                    next:
+                      type:
+                      - string
+                      - 'null'
+                    previous:
+                      type:
+                      - string
+                      - 'null'
+                    results:
                       type: array
                       items:
                         type: object
                         properties:
-                          role:
+                          id:
                             type: string
-                          content:
+                          memory:
                             type: string
-                    created_at:
-                      type: string
-                      format: date-time
-                    updated_at:
-                      type: string
-                      format: date-time
-                    owner:
-                      type: string
-                    immutable:
-                      type: boolean
-                      description: Whether the memory is immutable.
-                      title: Immutable
-                      default: false
-                    expiration_date:
-                      type:
-                      - string
-                      - 'null'
-                      format: date
-                      description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
-                      title: Expiration date
-                      default: null
-                    organization:
-                      type: string
-                    metadata:
-                      type: object
+                          user_id:
+                            type:
+                            - string
+                            - 'null'
+                            description: ID of the user this memory belongs to, if scoped to a user.
+                          metadata:
+                            type:
+                            - object
+                            - 'null'
+                            additionalProperties: true
+                            description: User-supplied metadata attached to the memory.
+                          categories:
+                            type:
+                            - array
+                            - 'null'
+                            items:
+                              type: string
+                          created_at:
+                            type: string
+                            format: date-time
+                          updated_at:
+                            type: string
+                            format: date-time
+                          expiration_date:
+                            type:
+                            - string
+                            - 'null'
+                            format: date
+                            description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                            default: null
+                          structured_attributes:
+                            type:
+                            - object
+                            - 'null'
+                            additionalProperties: true
+                            description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                          replaced_by:
+                            type:
+                            - string
+                            - 'null'
+                            description: ID of the memory that superseded this one, if any.
+                          synthesized:
+                            type: boolean
+                            description: Whether this memory was synthesized rather than directly extracted.
+                          lifecycle_state:
+                            type: string
+                            description: Lifecycle state of the memory.
+                        required:
+                        - id
+                        - memory
+                        - created_at
+                        - updated_at
                   required:
-                  - id
-                  - memory
-                  - created_at
-                  - updated_at
-                  - total_memories
-                  - owner
-                  - organization
-                  - type
+                  - count
+                  - next
+                  - previous
+                  - results
         '400':
           description: Bad Request.
           content:
             application/json:
               schema:
+                oneOf:
+                - type: array
+                  description: Returned when none of the required filters (app_id, user_id, agent_id, run_id) is supplied.
+                  items:
+                    type: string
+                  example:
+                  - 'One of the filters: app_id, user_id, agent_id, run_id is required!'
+                - type: object
+                  description: Returned when the `limit` query parameter is invalid.
+                  properties:
+                    error:
+                      type: string
+                  example:
+                    error: limit must be <= 200
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  message:
+                  detail:
                     type: string
-                    example: 'One of the filters: app_id, user_id, agent_id, run_id is required!'
+                    example: Invalid page.
       x-code-samples:
       - lang: Python
         source: '# To use the Python SDK, install the package:
@@ -201,6 +317,7 @@ paths:
       - Memories
       description: Add memories.
       operationId: memories_create
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -209,33 +326,56 @@ paths:
         required: true
       responses:
         '200':
-          description: Successful memory creation.
+          description: Memory processing has been queued for background (async) execution. The response reports queueing status, not the final memory content; poll `GET /v1/event/{event_id}/` with the returned `event_id` to see the processed result. By default (or with `version=v1` / `output_format=v1.0`) the response is a bare array. When both `output_format=v1.1` and `version=v2` are requested, the response is an object wrapping the same array under `results`.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
+                oneOf:
+                - type: array
+                  description: Default response shape.
+                  items:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: Memory processing has been queued for background execution
+                      status:
+                        type: string
+                        example: PENDING
+                      event_id:
+                        type: string
+                        format: uuid
+                    required:
+                    - message
+                    - status
+                    - event_id
+                - type: object
+                  description: Response shape when both `output_format=v1.1` and `version=v2` are requested.
                   properties:
-                    id:
-                      type: string
-                    data:
-                      type: object
-                      properties:
-                        memory:
-                          type: string
-                      required:
-                      - memory
-                    event:
-                      type: string
-                      enum:
-                      - ADD
-                      - UPDATE
-                      - DELETE
+                    results:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                            example: Memory processing has been queued for background execution
+                          status:
+                            type: string
+                            example: PENDING
+                          event_id:
+                            type: string
+                            format: uuid
+                        required:
+                        - message
+                        - status
+                        - event_id
+                    relations:
+                      type: array
+                      items: {}
                   required:
-                  - id
-                  - data
-                  - event
+                  - results
+                  - relations
         '400':
           description: Bad Request. Invalid input data. Please refer to the memory creation documentation at https://docs.mem0.ai/platform/quickstart#4-1-create-memories for correct formatting and required fields.
           content:
@@ -268,7 +408,7 @@ paths:
     delete:
       tags:
       - Memories
-      description: Delete memories by filter. At least one filter is required — previously omitting all filters silently deleted everything; now it returns a validation error.
+      description: Delete memories by filter. At least one filter is required. Previously, omitting all filters silently deleted everything; now it returns a validation error.
       operationId: memories_delete_all
       parameters:
       - name: user_id
@@ -309,8 +449,8 @@ paths:
           type: string
         description: Filter memories by project ID.
       responses:
-        '204':
-          description: Successful deletion of memories.
+        '200':
+          description: Deletion of memories has been queued for background (async) execution.
           content:
             application/json:
               schema:
@@ -318,7 +458,10 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Memories deleted successfully!
+                    example: Delete in progress. This may take some time.
+                  event_id:
+                    type: string
+                    format: uuid
       x-code-samples:
       - lang: Python
         source: '# To use the Python SDK, install the package:
@@ -341,7 +484,7 @@ paths:
           client.delete_all(user_id="*")
 
 
-          # Full project wipe — all four filters must be explicitly set to "*"
+          # Full project wipe: all four filters must be explicitly set to "*"
 
           client.delete_all(user_id="*", agent_id="*", app_id="*", run_id="*")
 
@@ -350,9 +493,9 @@ paths:
 
           # At least one filter is required to prevent accidental data loss.'
       - lang: JavaScript
-        source: "// To use the JavaScript SDK, install the package:\n// npm i mem0ai\n\nimport MemoryClient from 'mem0ai';\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\n// Delete all memories for a specific user\nclient.deleteAll({ user_id: \"<user_id>\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n\n// Delete all memories for every user in the project (wildcard)\nclient.deleteAll({ user_id: \"*\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n\n// Full project wipe — all four filters must be explicitly set to \"*\"\nclient.deleteAll({ user_id: \"*\", agent_id: \"*\", app_id: \"*\", run_id: \"*\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));"
+        source: "// To use the JavaScript SDK, install the package:\n// npm i mem0ai\n\nimport MemoryClient from 'mem0ai';\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\n// Delete all memories for a specific user\nclient.deleteAll({ user_id: \"<user_id>\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n\n// Delete all memories for every user in the project (wildcard)\nclient.deleteAll({ user_id: \"*\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n\n// Full project wipe: all four filters must be explicitly set to \"*\"\nclient.deleteAll({ user_id: \"*\", agent_id: \"*\", app_id: \"*\", run_id: \"*\" })\n  .then(result => console.log(result))\n  .catch(error => console.error(error));"
       - lang: cURL
-        source: "# Delete memories for a specific user\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=<user_id>' \\\n  --header 'Authorization: Token <api-key>'\n\n# Delete memories for all users (wildcard)\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=*' \\\n  --header 'Authorization: Token <api-key>'\n\n# Full project wipe — all four filters must be set to *\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=*&agent_id=*&app_id=*&run_id=*' \\\n  --header 'Authorization: Token <api-key>'"
+        source: "# Delete memories for a specific user\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=<user_id>' \\\n  --header 'Authorization: Token <api-key>'\n\n# Delete memories for all users (wildcard)\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=*' \\\n  --header 'Authorization: Token <api-key>'\n\n# Full project wipe: all four filters must be set to *\ncurl --request DELETE \\\n  --url 'https://api.mem0.ai/v1/memories/?user_id=*&agent_id=*&app_id=*&run_id=*' \\\n  --header 'Authorization: Token <api-key>'"
       - lang: Go
         source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.mem0.ai/v1/memories/\"\n\n\treq, _ := http.NewRequest(\"DELETE\", url, nil)\n\n\treq.Header.Add(\"Authorization\", \"Token <api-key>\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
       - lang: PHP
@@ -368,6 +511,7 @@ paths:
       - Memories
       description: Get all memories.
       operationId: memories_list_v2
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -386,42 +530,76 @@ paths:
                   properties:
                     id:
                       type: string
+                      format: uuid
+                      description: Unique memory identifier.
                     memory:
                       type: string
+                      description: The extracted memory fact.
+                    user_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: User the memory is scoped to.
+                    agent_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: Agent the memory is scoped to.
+                    app_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: App the memory is scoped to.
+                    session_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: 'Run/session the memory is scoped to. Note: this endpoint returns this field as `session_id`, matching `POST /v3/memories/`.'
+                    metadata:
+                      type:
+                      - object
+                      - 'null'
+                      additionalProperties: true
+                      description: Additional metadata associated with the memory
+                    categories:
+                      type:
+                      - array
+                      - 'null'
+                      items:
+                        type: string
                     created_at:
                       type: string
                       format: date-time
+                      description: Timestamp of when the memory was created.
                     updated_at:
                       type: string
                       format: date-time
-                    owner:
-                      type: string
-                    immutable:
-                      type: boolean
-                      description: Whether the memory is immutable.
-                      title: Immutable
-                      default: false
+                      description: Timestamp of when the memory was last updated.
                     expiration_date:
                       type:
                       - string
                       - 'null'
                       format: date
                       description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
-                      title: Expiration date
-                      default: null
-                    organization:
-                      type: string
-                    metadata:
-                      type: object
+                    structured_attributes:
+                      type:
+                      - object
+                      - 'null'
+                      additionalProperties: true
+                      description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                    replaced_by:
+                      type:
+                      - string
+                      - 'null'
+                      description: ID of the memory that superseded this one, if any.
+                    synthesized:
+                      type: boolean
+                      description: Whether this memory was synthesized rather than directly extracted.
                   required:
                   - id
                   - memory
                   - created_at
                   - updated_at
-                  - total_memories
-                  - owner
-                  - organization
-                  - type
         '400':
           description: Bad Request.
           content:
@@ -451,11 +629,146 @@ paths:
     get:
       tags:
       - Memories
+      description: Despite the endpoint name, this returns memory history entries (the same shape as `GET /v1/memories/{memory_id}/history/`), not event/ingestion-job records. For event/ingestion-job status, use `GET /v1/event/{event_id}/`.
       operationId: memories_events_list
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+        description: 'Page number for pagination. Default: 1. Default page size is 100.'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: 'Number of items per page. Default: 100.'
       responses:
         '200':
-          description: Successfully retrieved memory events.
-          content: {}
+          description: Successfully retrieved memory history entries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                          description: Unique identifier for the history entry.
+                        memory_id:
+                          type: string
+                          format: uuid
+                          description: Unique identifier of the associated memory.
+                        input:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              role:
+                                type: string
+                              content:
+                                type: string
+                          description: The conversation input that led to this memory change
+                        old_memory:
+                          type:
+                          - string
+                          - 'null'
+                          description: The previous state of the memory, if applicable
+                        new_memory:
+                          type: string
+                          description: The new or updated state of the memory
+                        user_id:
+                          type: string
+                          description: The identifier of the user associated with this memory
+                        agent_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: The identifier of the agent associated with this memory, if any.
+                        app_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: The identifier of the app associated with this memory, if any.
+                        session_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: The run identifier associated with this memory, returned as `session_id`.
+                        categories:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                          description: Categories associated with the memory at this point in its history
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: The timestamp when this history entry was created.
+                        event:
+                          type: string
+                          enum:
+                          - ADD
+                          - UPDATE
+                          - DELETE
+                          description: The type of event that occurred
+                        previous_embedding_qwen:
+                          type:
+                          - string
+                          - 'null'
+                          description: Previous internal embedding representation (Qwen model), if applicable
+                        embedding_qwen:
+                          type:
+                          - string
+                          - 'null'
+                          description: Internal embedding representation (Qwen model), if available
+                        metadata:
+                          type:
+                          - object
+                          - 'null'
+                          description: Additional metadata associated with the memory change
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: The timestamp when this history entry was last updated.
+                      required:
+                      - id
+                      - memory_id
+                      - new_memory
+                      - user_id
+                      - event
+                      - created_at
+                      - updated_at
+                required:
+                - count
+                - next
+                - previous
+                - results
+        '404':
+          description: Invalid page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Invalid page.
       summary: Memories events list
       x-summary-source: derived
   /v1/memories/search/:
@@ -464,6 +777,7 @@ paths:
       - Memories
       description: Perform a semantic search on memories.
       operationId: memories_search_create
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -476,57 +790,116 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
+                oneOf:
+                - type: array
+                  description: Default response shape. Returned when `output_format` is omitted or set to `v1.0`.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: Unique identifier for the memory.
+                      memory:
+                        type: string
+                        description: The content of the memory
+                      user_id:
+                        type: string
+                        description: The identifier of the user associated with this memory
+                      score:
+                        type: number
+                        description: Relevance score of the memory for the search query.
+                      metadata:
+                        type:
+                        - object
+                        - 'null'
+                        description: Additional metadata associated with the memory
+                      categories:
+                        type: array
+                        items:
+                          type: string
+                        description: Categories associated with the memory
+                      expiration_date:
+                        type:
+                        - string
+                        - 'null'
+                        format: date
+                        description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                        title: Expiration date
+                        default: null
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: The timestamp when the memory was created.
+                      updated_at:
+                        type: string
+                        format: date-time
+                        description: The timestamp when the memory was last updated.
+                    required:
+                    - id
+                    - memory
+                    - user_id
+                    - created_at
+                    - updated_at
+                - type: object
+                  description: Returned when `output_format=v1.1` is requested.
                   properties:
-                    id:
-                      type: string
-                      format: uuid
-                      description: Unique identifier for the memory.
-                    memory:
-                      type: string
-                      description: The content of the memory
-                    user_id:
-                      type: string
-                      description: The identifier of the user associated with this memory
-                    metadata:
-                      type:
-                      - object
-                      - 'null'
-                      description: Additional metadata associated with the memory
-                    categories:
+                    results:
                       type: array
                       items:
-                        type: string
-                      description: Categories associated with the memory
-                    immutable:
-                      type: boolean
-                      description: Whether the memory is immutable.
-                      title: Immutable
-                      default: false
-                    expiration_date:
-                      type:
-                      - string
-                      - 'null'
-                      format: date
-                      description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
-                      title: Expiration date
-                      default: null
-                    created_at:
-                      type: string
-                      format: date-time
-                      description: The timestamp when the memory was created.
-                    updated_at:
-                      type: string
-                      format: date-time
-                      description: The timestamp when the memory was last updated.
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            format: uuid
+                            description: Unique identifier for the memory.
+                          memory:
+                            type: string
+                            description: The content of the memory
+                          user_id:
+                            type: string
+                            description: The identifier of the user associated with this memory
+                          score:
+                            type: number
+                            description: Relevance score of the memory for the search query.
+                          metadata:
+                            type:
+                            - object
+                            - 'null'
+                            description: Additional metadata associated with the memory
+                          categories:
+                            type: array
+                            items:
+                              type: string
+                            description: Categories associated with the memory
+                          expiration_date:
+                            type:
+                            - string
+                            - 'null'
+                            format: date
+                            description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                            title: Expiration date
+                            default: null
+                          created_at:
+                            type: string
+                            format: date-time
+                            description: The timestamp when the memory was created.
+                          updated_at:
+                            type: string
+                            format: date-time
+                            description: The timestamp when the memory was last updated.
+                        required:
+                        - id
+                        - memory
+                        - user_id
+                        - created_at
+                        - updated_at
+                    relations:
+                      type: array
+                      items: {}
                   required:
-                  - id
-                  - memory
-                  - user_id
-                  - created_at
-                  - updated_at
+                  - results
+                  - relations
         '400':
           description: Bad Request.
           content:
@@ -574,6 +947,7 @@ paths:
       - Memories
       description: Search memories based on a query and filters.
       operationId: memories_search_v2
+      deprecated: true
       requestBody:
         content:
           application/json:
@@ -610,11 +984,6 @@ paths:
                       items:
                         type: string
                       description: Categories associated with the memory
-                    immutable:
-                      type: boolean
-                      description: Whether the memory is immutable.
-                      title: Immutable
-                      default: false
                     expiration_date:
                       type:
                       - string
@@ -631,6 +1000,25 @@ paths:
                       type: string
                       format: date-time
                       description: The timestamp when the memory was last updated.
+                    score:
+                      type: number
+                      format: float
+                      minimum: 0
+                      maximum: 1
+                      description: Combined multi-signal relevance score in [0, 1] (search responses only).
+                    agent_id:
+                      type:
+                      - string
+                      - 'null'
+                    app_id:
+                      type:
+                      - string
+                      - 'null'
+                    session_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: 'Run/session the memory is scoped to. Note: this endpoint returns this field as `session_id`, matching `POST /v3/memories/`.'
                   required:
                   - id
                   - memory
@@ -658,7 +1046,7 @@ paths:
       tags:
       - Memories
       summary: Get all memories (V3, paginated)
-      description: List memories scoped by filters, paginated. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. `filters` supports the same operator set as V2 search (`AND`, `OR`, `NOT`, `in`, `gte`, `lte`, etc.). Response is a paginated envelope; pass `page` and `page_size` as query parameters to step through results.
+      description: List memories scoped by filters, paginated. Entity IDs **must** be passed inside the `filters` object. Top-level `user_id` / `agent_id` / `run_id` are rejected with 400. `filters` supports the same operator set as V2 search (`AND`, `OR`, `NOT`, `in`, `gte`, `lte`, etc.). Response is a paginated envelope; pass `page` and `page_size` as query parameters to step through results.
       operationId: memories_list_v3
       parameters:
       - in: query
@@ -689,6 +1077,37 @@ paths:
                   type: object
                   description: Entity and metadata filters. Must include at least one entity ID (`user_id`, `agent_id`, `app_id`, or `run_id`).
                   additionalProperties: true
+                show_expired:
+                  type: boolean
+                  default: false
+                  description: When true, include memories whose `expiration_date` has passed. Expired memories are hidden by default.
+                start_date:
+                  type: string
+                  format: date
+                  description: Only include memories created on or after this date (YYYY-MM-DD).
+                end_date:
+                  type: string
+                  format: date
+                  description: Only include memories created on or before this date (YYYY-MM-DD).
+                categories:
+                  type: array
+                  items:
+                    type: string
+                  description: Restrict results to memories tagged with any of these categories.
+                fields:
+                  type: array
+                  items:
+                    type: string
+                  description: Restrict the fields returned per memory, e.g. ["id", "memory"].
+                keywords:
+                  type: string
+                  description: Free-text keyword filter applied on top of filters.
+                page:
+                  type: integer
+                  description: 1-indexed page number. Also accepted here in the request body; the query parameter of the same name takes precedence.
+                page_size:
+                  type: integer
+                  description: Results per page. Also accepted here in the request body; the query parameter of the same name takes precedence.
             example:
               filters:
                 user_id: alice
@@ -727,20 +1146,58 @@ paths:
                         memory:
                           type: string
                           description: The extracted memory fact.
-                        score:
-                          type: number
-                          format: float
-                          minimum: 0
-                          maximum: 1
-                          description: Combined multi-signal relevance score in [0, 1] (search responses only).
+                        user_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: User the memory is scoped to.
+                        agent_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: Agent the memory is scoped to.
+                        app_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: App the memory is scoped to.
+                        session_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: 'Run/session the memory is scoped to. Note: this endpoint returns this field as `session_id`, while `POST /v3/memories/search/` returns the same value as `run_id`.'
                         metadata:
-                          type: object
+                          type:
+                          - object
+                          - 'null'
                           additionalProperties: true
                           description: User-supplied metadata attached to the memory.
                         categories:
-                          type: array
+                          type:
+                          - array
+                          - 'null'
                           items:
                             type: string
+                        structured_attributes:
+                          type:
+                          - object
+                          - 'null'
+                          additionalProperties: true
+                          description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                        replaced_by:
+                          type:
+                          - string
+                          - 'null'
+                          description: ID of the memory that superseded this one, if any.
+                        synthesized:
+                          type: boolean
+                          description: Whether this memory was synthesized rather than directly extracted.
+                        expiration_date:
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          description: Date after which the memory is hidden from search and get-all unless `show_expired` is true.
                         created_at:
                           type: string
                           format: date-time
@@ -769,9 +1226,9 @@ paths:
                   created_at: '2026-01-15T10:30:00Z'
                   updated_at: '2026-01-15T10:30:00Z'
         '400':
-          description: Validation error — e.g. empty `filters` or no positively-scoped entity ID.
+          description: Validation error, e.g. empty `filters` or no positively-scoped entity ID.
         '401':
-          description: Unauthorized — missing or invalid API key.
+          description: 'Unauthorized: missing or invalid API key.'
       security:
       - tokenAuth: []
       x-codeSamples:
@@ -837,19 +1294,85 @@ paths:
                   type: object
                   additionalProperties: true
                   description: User-supplied metadata to attach to each extracted memory.
+                expiration_date:
+                  type:
+                  - string
+                  - 'null'
+                  format: date
+                  description: Optional expiration date in YYYY-MM-DD format. After this date, memories are hidden from search and get-all unless `show_expired` is true.
                 custom_instructions:
                   type: string
                   description: Project-level instructions that guide extraction for this call.
+                agent_custom_instructions:
+                  type: string
+                  description: Extraction instructions for agent-scoped memories, overriding the project-level setting for this call. Applied when `agent_id` is sent without `user_id`; when both are sent it governs the assistant-attributed memories while `custom_instructions` governs the rest.
+                custom_categories:
+                  type: array
+                  description: Category catalog for this call. Replaces the project-level list rather than merging with it. Omit to fall back to the project list, then the default catalog.
+                  items:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Maps a category name to the description the classifier matches against.
                 infer:
                   type: boolean
                   default: true
                   description: When `false`, stores each message verbatim without running the extraction LLM.
+                app_id:
+                  type: string
+                  description: Scope memories to this app.
+                immutable:
+                  type: boolean
+                  default: false
+                  description: Mark stored memories as immutable, excluding them from future update/consolidation.
+                includes:
+                  type: string
+                  description: Free-text hint of what to include during extraction, e.g. "vehicles".
+                excludes:
+                  type: string
+                  description: Free-text hint of what to exclude during extraction, e.g. "politics".
+                enable_graph:
+                  type: boolean
+                  description: Enable graph memory extraction for this call.
+                structured_data_schema:
+                  type:
+                  - object
+                  - 'null'
+                  additionalProperties: true
+                  description: Optional schema constraining structured extraction. Exact shape not fully characterized; observed only as null in captured traffic.
+                output_format:
+                  type:
+                  - string
+                  - 'null'
+                  description: Response envelope version, e.g. "v1.1". Full set of accepted values not confirmed.
+                prompt_profile_id:
+                  type:
+                  - string
+                  - 'null'
+                  description: ID of a saved prompt profile to use for extraction.
+                temporal_reasoning:
+                  type: boolean
+                  description: Enable temporal reasoning during extraction.
+                timezone:
+                  type: string
+                  description: IANA timezone used to interpret observation_datetime and observation_date, e.g. "UTC".
+                observation_datetime:
+                  type: string
+                  format: date-time
+                  description: ISO 8601 datetime the conversation was observed.
+                observation_date:
+                  type: string
+                  format: date
+                  description: Date the conversation was observed (YYYY-MM-DD).
+                timestamp:
+                  type: integer
+                  description: Unix epoch seconds used to backdate created_at on the stored memories. Not echoed back in the event payload but confirmed applied.
             example:
               messages:
               - role: user
                 content: I just moved to San Francisco from New York.
               - role: assistant
-                content: Got it — I'll update your location.
+                content: Got it, I'll update your location.
               user_id: alice
       responses:
         '200':
@@ -861,6 +1384,7 @@ paths:
                 properties:
                   message:
                     type: string
+                    description: Only present when `infer` is `false`, where processing is synchronous.
                   status:
                     type: string
                     enum:
@@ -870,29 +1394,45 @@ paths:
                   event_id:
                     type: string
                     format: uuid
+                  results:
+                    type: array
+                    description: Only present when `infer` is `false`, where processing is synchronous and memories are stored verbatim without extraction.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          format: uuid
+                        data:
+                          type: object
+                          properties:
+                            memory:
+                              type: string
+                        event:
+                          type: string
+                          example: ADD
               example:
-                message: Memory processing has been queued for background execution
-                status: PENDING
                 event_id: 2c4d1f44-4f7b-4b2f-9f6e-7b5b4f5a1234
+                status: PENDING
         '400':
-          description: Validation error — e.g. missing `messages` or no entity ID supplied.
+          description: Validation error, e.g. missing `messages` or no entity ID supplied.
         '401':
-          description: Unauthorized — missing or invalid API key.
+          description: 'Unauthorized: missing or invalid API key.'
       security:
       - tokenAuth: []
       x-codeSamples:
       - lang: cURL
-        source: "curl -X POST https://api.mem0.ai/v3/memories/add/ \\\n  -H \"Authorization: Token <api-key>\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"I just moved to San Francisco from New York.\"},\n      {\"role\": \"assistant\", \"content\": \"Got it — I\\u0027ll update your location.\"}\n    ],\n    \"user_id\": \"alice\"\n  }'"
+        source: "curl -X POST https://api.mem0.ai/v3/memories/add/ \\\n  -H \"Authorization: Token <api-key>\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"I just moved to San Francisco from New York.\"},\n      {\"role\": \"assistant\", \"content\": \"Got it, I\\u0027ll update your location.\"}\n    ],\n    \"user_id\": \"alice\"\n  }'"
       - lang: Python
-        source: "from mem0 import MemoryClient\n\nclient = MemoryClient(api_key=\"your-api-key\")\n\nresult = client.add(\n    messages=[\n        {\"role\": \"user\", \"content\": \"I just moved to San Francisco from New York.\"},\n        {\"role\": \"assistant\", \"content\": \"Got it — I'll update your location.\"}\n    ],\n    user_id=\"alice\",\n)\nprint(result)"
+        source: "from mem0 import MemoryClient\n\nclient = MemoryClient(api_key=\"your-api-key\")\n\nresult = client.add(\n    messages=[\n        {\"role\": \"user\", \"content\": \"I just moved to San Francisco from New York.\"},\n        {\"role\": \"assistant\", \"content\": \"Got it, I'll update your location.\"}\n    ],\n    user_id=\"alice\",\n)\nprint(result)"
       - lang: JavaScript
-        source: "import MemoryClient from \"mem0ai\";\n\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\nconst result = await client.add(\n  [\n    { role: \"user\", content: \"I just moved to San Francisco from New York.\" },\n    { role: \"assistant\", content: \"Got it — I'll update your location.\" },\n  ],\n  { userId: \"alice\" }\n);\nconsole.log(result);"
+        source: "import MemoryClient from \"mem0ai\";\n\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\nconst result = await client.add(\n  [\n    { role: \"user\", content: \"I just moved to San Francisco from New York.\" },\n    { role: \"assistant\", content: \"Got it, I'll update your location.\" },\n  ],\n  { userId: \"alice\" }\n);\nconsole.log(result);"
   /v3/memories/search/:
     post:
       tags:
       - Memories
       summary: Search memories (V3)
-      description: Relevance-ranked search across stored memories. V3 uses hybrid retrieval and can also apply temporal reasoning for time-aware queries. Entity IDs **must** be passed inside the `filters` object — top-level `user_id` / `agent_id` / `run_id` are rejected with 400. At least one entity ID is required.
+      description: Relevance-ranked search across stored memories. V3 uses hybrid retrieval and can also apply temporal reasoning for time-aware queries. Entity IDs **must** be passed inside the `filters` object. Top-level `user_id` / `agent_id` / `run_id` are rejected with 400. At least one entity ID is required.
       operationId: memories_search_v3
       requestBody:
         required: true
@@ -912,6 +1452,10 @@ paths:
                   type: object
                   description: Entity and metadata filters. Must include at least one entity ID (`user_id`, `agent_id`, `app_id`, or `run_id`). Supports `AND`, `OR`, `NOT`, and comparison operators (`in`, `gte`, `lte`, `gt`, `lt`, `contains`, `icontains`, `ne`).
                   additionalProperties: true
+                show_expired:
+                  type: boolean
+                  default: false
+                  description: When true, include memories whose `expiration_date` has passed. Expired memories are hidden by default.
                 top_k:
                   type: integer
                   minimum: 1
@@ -920,8 +1464,8 @@ paths:
                   description: Number of results to return.
                 threshold:
                   type: number
-                  minimum: 0
-                  maximum: 1
+                  minimum: 0.0
+                  maximum: 1.0
                   default: 0.1
                   description: Minimum semantic relevance score. Pass `0.0` to disable filtering.
                 rerank:
@@ -933,7 +1477,21 @@ paths:
                   - type: integer
                   - type: number
                   - type: string
-                  description: Optional query anchor time for relative temporal interpretation. Accepts Unix epoch, YYYY-MM-DD, or ISO datetime.
+                  description: Date and time to simulate the search from. Accepts a Unix epoch, YYYY-MM-DD, or ISO datetime.
+                fields:
+                  type: array
+                  items:
+                    type: string
+                  description: Restrict the fields returned per memory.
+                categories:
+                  type: array
+                  items:
+                    type: string
+                  description: Filter results to memories tagged with any of these categories.
+                metadata:
+                  type: object
+                  additionalProperties: true
+                  description: Filter results to memories matching this metadata.
             example:
               query: where does the user live?
               filters:
@@ -959,14 +1517,50 @@ paths:
                         memory:
                           type: string
                           description: The extracted memory fact.
+                        user_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: User the memory is scoped to.
                         score:
                           type: number
                           format: float
                           minimum: 0
                           maximum: 1
                           description: Combined multi-signal relevance score in [0, 1] (search responses only).
-                        metadata:
+                        score_breakdown:
                           type: object
+                          description: Per-signal breakdown of the relevance score.
+                          properties:
+                            semantic:
+                              type: number
+                            bm25:
+                              type: number
+                            entity:
+                              type: number
+                        agent_id:
+                          type:
+                          - string
+                          - 'null'
+                        app_id:
+                          type:
+                          - string
+                          - 'null'
+                        run_id:
+                          type:
+                          - string
+                          - 'null'
+                          description: 'Run/session the memory is scoped to. Note: this endpoint returns this field as `run_id`, while `POST /v3/memories/` returns the same value as `session_id`.'
+                        expiration_date:
+                          type:
+                          - string
+                          - 'null'
+                          format: date
+                          description: Date after which the memory is hidden from search unless `show_expired` is true.
+                        metadata:
+                          type:
+                          - object
+                          - 'null'
                           additionalProperties: true
                           description: User-supplied metadata attached to the memory.
                         categories:
@@ -996,9 +1590,9 @@ paths:
                   created_at: '2026-01-15T10:30:00Z'
                   updated_at: '2026-01-15T10:30:00Z'
         '400':
-          description: Validation error — e.g. empty `query`, missing `filters`, or no positively-scoped entity ID.
+          description: Validation error, e.g. empty `query`, missing `filters`, or no positively-scoped entity ID.
         '401':
-          description: Unauthorized — missing or invalid API key.
+          description: 'Unauthorized: missing or invalid API key.'
       security:
       - tokenAuth: []
       x-codeSamples:
@@ -1009,25 +1603,120 @@ paths:
       - lang: JavaScript
         source: "import MemoryClient from \"mem0ai\";\n\nconst client = new MemoryClient({ apiKey: \"your-api-key\" });\n\nconst results = await client.search(\"where does the user live?\", {\n  filters: { userId: \"alice\" },\n  topK: 10,\n});\nfor (const r of results.results) {\n  console.log(r.memory, r.score);\n}"
   /v1/memories/{entity_type}/{entity_id}/:
-    parameters:
-    - name: entity_type
-      in: path
-      required: true
-      schema:
-        type: string
-    - name: entity_id
-      in: path
-      required: true
-      schema:
-        type: string
     get:
       tags:
       - Memories
+      description: Returns a paginated list of memories belonging to the given entity.
       operationId: memories_entity_read
+      parameters:
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - user
+          - agent
+          - run
+          - app
+        description: 'The type of entity to retrieve memories for. Any other value returns `400 {"error": "Invalid entity type"}`.'
+      - name: entity_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The identifier of the entity whose memories to retrieve.
+      - name: page
+        in: query
+        schema:
+          type: integer
+        description: 'Page number for pagination. Default: 1. Page size is fixed at 100 and is not client-configurable.'
       responses:
         '200':
           description: Successfully retrieved memories.
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    type:
+                    - string
+                    - 'null'
+                  previous:
+                    type:
+                    - string
+                    - 'null'
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        memory:
+                          type: string
+                        metadata:
+                          type:
+                          - object
+                          - 'null'
+                          additionalProperties: true
+                        categories:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        updated_at:
+                          type: string
+                          format: date-time
+                        input:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              role:
+                                type: string
+                              content:
+                                type: string
+                          description: The conversation input that produced this memory.
+                        is_updated:
+                          type: boolean
+                      required:
+                      - id
+                      - memory
+                      - created_at
+                      - updated_at
+                required:
+                - count
+                - next
+                - previous
+                - results
+        '400':
+          description: Invalid entity type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid entity type
+        '404':
+          description: Invalid page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Invalid page.
       summary: Memories entity read
       x-summary-source: derived
   /v1/memories/{memory_id}/:
@@ -1060,29 +1749,37 @@ paths:
                     type: string
                     description: The content of the memory
                   user_id:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     description: Identifier of the user associated with this memory
                   agent_id:
                     type:
                     - string
                     - 'null'
-                    description: The agent ID associated with the memory, if any
+                    description: The identifier of the agent associated with this memory, if any.
                   app_id:
                     type:
                     - string
                     - 'null'
-                    description: The app ID associated with the memory, if any
-                  run_id:
+                    description: The identifier of the app associated with this memory, if any.
+                  session_id:
                     type:
                     - string
                     - 'null'
-                    description: The run ID associated with the memory, if any
-                  hash:
-                    type: string
-                    description: Hash of the memory content
+                    description: The run identifier associated with this memory, returned as `session_id`.
                   metadata:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
+                    additionalProperties: true
                     description: Additional metadata associated with the memory
+                  categories:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
                   created_at:
                     type: string
                     format: date-time
@@ -1091,6 +1788,39 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp of when the memory was last updated.
+                  expiration_date:
+                    type:
+                    - string
+                    - 'null'
+                    format: date
+                    description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                  structured_attributes:
+                    type:
+                    - object
+                    - 'null'
+                    additionalProperties: true
+                    description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                  replaced_by:
+                    type:
+                    - string
+                    - 'null'
+                    description: ID of the memory that superseded this one, if any.
+                  synthesized:
+                    type: boolean
+                    description: Whether this memory was synthesized rather than directly extracted.
+                  lifecycle_state:
+                    type: string
+                    description: Lifecycle state of the memory.
+        '400':
+          description: Invalid memory ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: memory_id should be a valid UUID
         '404':
           description: Memory not found.
           content:
@@ -1129,7 +1859,7 @@ paths:
     put:
       tags:
       - Memories
-      description: Get or Update or delete a memory.
+      description: Update a memory's text, metadata, or expiration date.
       operationId: memories_update
       parameters:
       - name: memory_id
@@ -1138,7 +1868,7 @@ paths:
         schema:
           type: string
           format: uuid
-        description: The unique identifier of the memory to retrieve.
+        description: The unique identifier of the memory to update.
       requestBody:
         content:
           application/json:
@@ -1151,6 +1881,12 @@ paths:
                 metadata:
                   type: object
                   description: Additional metadata associated with the memory
+                expiration_date:
+                  type:
+                  - string
+                  - 'null'
+                  format: date
+                  description: Expiration date in YYYY-MM-DD format, or null to clear the expiration date.
       responses:
         '200':
           description: Successfully updated memory.
@@ -1163,35 +1899,41 @@ paths:
                     type: string
                     format: uuid
                     description: The unique identifier of the updated memory.
-                  text:
+                  memory:
                     type: string
-                    description: The updated text content of the memory
+                    description: The updated content of the memory.
                   user_id:
                     type:
                     - string
                     - 'null'
-                    description: The user ID associated with the memory, if any
+                    description: Identifier of the user associated with this memory
                   agent_id:
                     type:
                     - string
                     - 'null'
-                    description: The agent ID associated with the memory, if any
+                    description: The identifier of the agent associated with this memory, if any.
                   app_id:
                     type:
                     - string
                     - 'null'
-                    description: The app ID associated with the memory, if any
-                  run_id:
+                    description: The identifier of the app associated with this memory, if any.
+                  session_id:
                     type:
                     - string
                     - 'null'
-                    description: The run ID associated with the memory, if any
-                  hash:
-                    type: string
-                    description: Hash of the memory content
+                    description: The run identifier associated with this memory, returned as `session_id`.
                   metadata:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
+                    additionalProperties: true
                     description: Additional metadata associated with the memory
+                  categories:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
                   created_at:
                     type: string
                     format: date-time
@@ -1200,6 +1942,49 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp of when the memory was last updated.
+                  expiration_date:
+                    type:
+                    - string
+                    - 'null'
+                    format: date
+                    description: 'The date when the memory will expire. Format: YYYY-MM-DD.'
+                  structured_attributes:
+                    type:
+                    - object
+                    - 'null'
+                    additionalProperties: true
+                    description: System-derived temporal breakdown of the memory's creation time (e.g. year, month, day_of_week).
+                  replaced_by:
+                    type:
+                    - string
+                    - 'null'
+                    description: ID of the memory that superseded this one, if any.
+                  synthesized:
+                    type: boolean
+                    description: Whether this memory was synthesized rather than directly extracted.
+                  lifecycle_state:
+                    type: string
+                    description: Lifecycle state of the memory.
+        '400':
+          description: Invalid memory ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: memory_id should be a valid UUID
+        '404':
+          description: Memory not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Memory not found!
       x-code-samples:
       - lang: Python
         source: "# To use the Python SDK, install the package:\n# pip install mem0ai\n\nfrom mem0 import MemoryClient\nclient = MemoryClient(api_key=\"your_api_key\")\n\n# Update a memory\nmemory_id = \"<memory_id>\"\nclient.update(\n    memory_id=memory_id,\n    text=\"Your updated memory message here\",\n    metadata={\"category\": \"example\"}\n)"
@@ -1219,7 +2004,7 @@ paths:
     delete:
       tags:
       - Memories
-      description: Get or Update or delete a memory.
+      description: Delete a memory.
       operationId: memories_delete
       parameters:
       - name: memory_id
@@ -1228,9 +2013,15 @@ paths:
         schema:
           type: string
           format: uuid
-        description: The unique identifier of the memory to retrieve.
+        description: The unique identifier of the memory to delete.
+      - name: delete_linked
+        in: query
+        schema:
+          type: boolean
+          default: false
+        description: If true, also delete memories linked to this one. The response then includes a `cascade_count` field with the number of linked memories deleted.
       responses:
-        '204':
+        '200':
           description: Successful deletion of memory.
           content:
             application/json:
@@ -1240,6 +2031,29 @@ paths:
                   message:
                     type: string
                     example: Memory deleted successfully!
+                  cascade_count:
+                    type: integer
+                    description: Number of linked memories also deleted. Only present when `delete_linked=true` was passed.
+        '400':
+          description: Invalid memory ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: memory_id should be a valid UUID
+        '404':
+          description: Memory not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Memory not found!
       x-code-samples:
       - lang: Python
         source: '# To use the Python SDK, install the package:
@@ -1328,6 +2142,28 @@ paths:
                     user_id:
                       type: string
                       description: The identifier of the user associated with this memory
+                    agent_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: The identifier of the agent associated with this memory, if any.
+                    app_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: The identifier of the app associated with this memory, if any.
+                    session_id:
+                      type:
+                      - string
+                      - 'null'
+                      description: The run identifier associated with this memory, returned as `session_id`.
+                    categories:
+                      type:
+                      - array
+                      - 'null'
+                      items:
+                        type: string
+                      description: Categories associated with the memory at this point in its history
                     event:
                       type: string
                       enum:
@@ -1335,6 +2171,16 @@ paths:
                       - UPDATE
                       - DELETE
                       description: The type of event that occurred
+                    previous_embedding_qwen:
+                      type:
+                      - string
+                      - 'null'
+                      description: Previous internal embedding representation (Qwen model), if applicable
+                    embedding_qwen:
+                      type:
+                      - string
+                      - 'null'
+                      description: Internal embedding representation (Qwen model), if available
                     metadata:
                       type:
                       - object
@@ -1400,6 +2246,50 @@ paths:
         source: "HttpResponse<String> response = Unirest.get(\"https://api.mem0.ai/v1/memories/{memory_id}/history/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .asString();"
       summary: Memories history list
       x-summary-source: derived
+  /v1/summary/:
+    post:
+      tags:
+      - Memories
+      summary: Get a summary of memories matching the given filters
+      description: Backs the Python SDK's `client.get_summary()`. Not currently exposed by the TypeScript SDK.
+      operationId: summary_create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  type: object
+                  description: 'Either flat field:value pairs (e.g. `{"user_id": "<user_id>"}`) or the structured AND/OR filter format used by `/v2/memories/search/`.'
+              required:
+              - filters
+      responses:
+        '200':
+          description: Successfully retrieved the summary.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+      x-code-samples:
+      - lang: Python
+        source: '# To use the Python SDK, install the package:
+
+          # pip install mem0ai
+
+
+          from mem0 import MemoryClient
+
+          client = MemoryClient(api_key="your_api_key")
+
+
+          summary = client.get_summary(filters={"user_id": "<user_id>"})
+
+          print(summary)'
+      - lang: cURL
+        source: "curl --request POST \\\n  --url https://api.mem0.ai/v1/summary/ \\\n  --header 'Authorization: Token <api-key>' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"filters\": {\"user_id\": \"<user_id>\"}\n}'"
   /v1/batch/:
     put:
       tags:
@@ -1418,7 +2308,6 @@ paths:
                     type: object
                     required:
                     - memory_id
-                    - text
                     properties:
                       memory_id:
                         type: string
@@ -1427,6 +2316,10 @@ paths:
                       text:
                         type: string
                         description: The new text content for the memory
+                      metadata:
+                        type: object
+                        additionalProperties: true
+                        description: Updated metadata to associate with the memory.
                   maxItems: 1000
               required:
               - memories
@@ -1472,15 +2365,21 @@ paths:
             schema:
               type: object
               properties:
-                memory_ids:
+                memories:
                   type: array
                   items:
-                    type: string
-                    format: uuid
+                    type: object
+                    properties:
+                      memory_id:
+                        type: string
+                        format: uuid
+                        description: The unique identifier of the memory to delete.
+                    required:
+                    - memory_id
                   maxItems: 1000
-                  description: Array of memory IDs to delete.
+                  description: Array of memory objects to delete.
               required:
-              - memory_ids
+              - memories
         required: true
       responses:
         '200':
@@ -1514,216 +2413,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MemoryInput:
-      type: object
-      properties:
-        messages:
-          description: An array of message objects representing the content of the memory. Each message object typically contains 'role' and 'content' fields, where 'role' indicates the sender either 'user' or 'assistant' and 'content' contains the actual message text. This structure allows for the representation of conversations or multi-part memories.
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type:
-              - string
-              - 'null'
-        agent_id:
-          description: The unique identifier of the agent associated with this memory.
-          title: Agent id
-          type:
-          - string
-          - 'null'
-        user_id:
-          description: The unique identifier of the user associated with this memory.
-          title: User id
-          type:
-          - string
-          - 'null'
-        app_id:
-          description: The unique identifier of the application associated with this memory.
-          title: App id
-          type:
-          - string
-          - 'null'
-        run_id:
-          description: The unique identifier of the run associated with this memory.
-          title: Run id
-          type:
-          - string
-          - 'null'
-        metadata:
-          description: Additional metadata associated with the memory, which can be used to store any additional information or context about the memory. Best practice for incorporating additional information is through metadata (e.g. location, time, ids, etc.). During retrieval, you can either use these metadata alongside the query to fetch relevant memories or retrieve memories based on the query first and then refine the results using metadata during post-processing.
-          title: Metadata
-          type:
-          - object
-          - 'null'
-          properties: {}
-        includes:
-          description: String to include the specific preferences in the memory.
-          title: Includes
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        excludes:
-          description: String to exclude the specific preferences in the memory.
-          title: Excludes
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        infer:
-          description: Whether to infer the memories or directly store the messages.
-          title: Infer
-          type: boolean
-          default: true
-        output_format:
-          description: 'Controls the response format structure. `v1.0` (deprecated) returns a direct array of memory objects: `[{...}, {...}]`. `v1.1` (recommended) returns an object with a ''results'' key containing the array: `{"results": [...]}`. The `v1.0` format will be removed in future versions.'
-          title: Output format
-          type:
-          - string
-          - 'null'
-          default: v1.1
-        custom_categories:
-          description: A list of categories with category name and its description.
-          title: Custom categories
-          type:
-          - object
-          - 'null'
-          properties: {}
-        custom_instructions:
-          description: Defines project-specific guidelines for handling and organizing memories. When set at the project level, they apply to all new memories in that project.
-          title: Custom instructions
-          type:
-          - string
-          - 'null'
-        immutable:
-          description: Whether the memory is immutable.
-          title: Immutable
-          type: boolean
-          default: false
-        async_mode:
-          description: Whether to add the memory completely asynchronously.
-          title: Async mode
-          type: boolean
-          default: true
-        timestamp:
-          description: 'The timestamp of the memory. Format: Unix timestamp'
-          title: Timestamp
-          type:
-          - integer
-          - 'null'
-        expiration_date:
-          description: 'The date when the memory will expire. Format: YYYY-MM-DD'
-          title: Expiration date
-          type:
-          - string
-          - 'null'
-          format: date
-        org_id:
-          description: The unique identifier of the organization associated with this memory.
-          title: Organization id
-          type:
-          - string
-          - 'null'
-        project_id:
-          description: The unique identifier of the project associated with this memory.
-          title: Project id
-          type:
-          - string
-          - 'null'
-        version:
-          description: The version of the memory to use. The default version is v1, which is deprecated. We recommend using v2 for new applications.
-          title: Version
-          type:
-          - string
-          - 'null'
-    MemoryGetInputV2:
-      type: object
-      required:
-      - filters
-      properties:
-        filters:
-          title: Filters
-          type: object
-          description: 'A dictionary of filters to apply to retrieve memories. Available fields are: user_id, agent_id, app_id, run_id, created_at, updated_at, categories, keywords. Supports logical operators (AND, OR) and comparison operators (in, gte, lte, gt, lt, ne, contains, icontains, *). For categories field, use ''contains'' for partial matching (e.g., {"categories": {"contains": "finance"}}) or ''in'' for exact matching (e.g., {"categories": {"in": ["personal_information"]}}).'
-          properties:
-            user_id:
-              type: string
-            agent_id:
-              type: string
-            app_id:
-              type: string
-            run_id:
-              type: string
-            created_at:
-              type: string
-              format: date-time
-            updated_at:
-              type: string
-              format: date-time
-            keywords:
-              type: object
-              properties:
-                contains:
-                  type: string
-                icontains:
-                  type: string
-            categories:
-              type: object
-              properties:
-                in:
-                  type: array
-                  items:
-                    type: string
-            metadata:
-              type: object
-          additionalProperties:
-            type: object
-            properties:
-              in:
-                type: array
-              gte:
-                type: string
-              lte:
-                type: string
-              gt:
-                type: string
-              lt:
-                type: string
-              ne:
-                type: string
-              contains:
-                type: string
-              icontains:
-                type: string
-        fields:
-          title: Fields
-          type: array
-          items:
-            type: string
-          description: A list of field names to include in the response. If not provided, all fields will be returned.
-        page:
-          title: Page
-          type: integer
-          default: 1
-          description: 'Page number for pagination. Default: 1'
-        page_size:
-          title: Page Size
-          type: integer
-          default: 100
-          description: 'Number of items per page. Default: 100'
-        org_id:
-          title: Organization id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the organization associated with the memory.
-        project_id:
-          title: Project id
-          type:
-          - string
-          - 'null'
-          description: The unique identifier of the project associated with the memory.
     MemorySearchInputV2:
       type: object
       required:
@@ -1836,6 +2525,93 @@ components:
           - string
           - 'null'
           description: The unique identifier of the project associated with the memory.
+    MemoryGetInputV2:
+      type: object
+      required:
+      - filters
+      properties:
+        filters:
+          title: Filters
+          type: object
+          description: 'A dictionary of filters to apply to retrieve memories. Available fields are: user_id, agent_id, app_id, run_id, created_at, updated_at, categories, keywords. Supports logical operators (AND, OR) and comparison operators (in, gte, lte, gt, lt, ne, contains, icontains, *). For categories field, use ''contains'' for partial matching (e.g., {"categories": {"contains": "finance"}}) or ''in'' for exact matching (e.g., {"categories": {"in": ["personal_information"]}}).'
+          properties:
+            user_id:
+              type: string
+            agent_id:
+              type: string
+            app_id:
+              type: string
+            run_id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            keywords:
+              type: object
+              properties:
+                contains:
+                  type: string
+                icontains:
+                  type: string
+            categories:
+              type: object
+              properties:
+                in:
+                  type: array
+                  items:
+                    type: string
+            metadata:
+              type: object
+          additionalProperties:
+            type: object
+            properties:
+              in:
+                type: array
+              gte:
+                type: string
+              lte:
+                type: string
+              gt:
+                type: string
+              lt:
+                type: string
+              ne:
+                type: string
+              contains:
+                type: string
+              icontains:
+                type: string
+        fields:
+          title: Fields
+          type: array
+          items:
+            type: string
+          description: A list of field names to include in the response. If not provided, all fields will be returned.
+        page:
+          title: Page
+          type: integer
+          default: 1
+          description: 'Page number for pagination. Default: 1'
+        page_size:
+          title: Page Size
+          type: integer
+          default: 100
+          description: 'Number of items per page. Default: 100'
+        org_id:
+          title: Organization id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the organization associated with the memory.
+        project_id:
+          title: Project id
+          type:
+          - string
+          - 'null'
+          description: The unique identifier of the project associated with the memory.
     MemorySearchInput:
       required:
       - query
@@ -1903,7 +2679,7 @@ components:
           type:
           - string
           - 'null'
-          default: v1.1
+          default: v1.0
           description: 'The search method supports two output formats: `v1.0` (default) and `v1.1`. We recommend using `v1.1` as `v1.0` will be deprecated soon.'
         org_id:
           title: Organization id
@@ -1933,6 +2709,135 @@ components:
           type: boolean
           default: false
           description: Whether to only search for memories based on metadata.
+    MemoryInput:
+      type: object
+      properties:
+        messages:
+          description: An array of message objects representing the content of the memory. Each message object typically contains 'role' and 'content' fields, where 'role' indicates the sender either 'user' or 'assistant' and 'content' contains the actual message text. This structure allows for the representation of conversations or multi-part memories.
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        agent_id:
+          description: The unique identifier of the agent associated with this memory.
+          title: Agent id
+          type:
+          - string
+          - 'null'
+        user_id:
+          description: The unique identifier of the user associated with this memory.
+          title: User id
+          type:
+          - string
+          - 'null'
+        app_id:
+          description: The unique identifier of the application associated with this memory.
+          title: App id
+          type:
+          - string
+          - 'null'
+        run_id:
+          description: The unique identifier of the run associated with this memory.
+          title: Run id
+          type:
+          - string
+          - 'null'
+        metadata:
+          description: Additional metadata associated with the memory, which can be used to store any additional information or context about the memory. Best practice for incorporating additional information is through metadata (e.g. location, time, ids, etc.). During retrieval, you can either use these metadata alongside the query to fetch relevant memories or retrieve memories based on the query first and then refine the results using metadata during post-processing.
+          title: Metadata
+          type:
+          - object
+          - 'null'
+          properties: {}
+        includes:
+          description: String to include the specific preferences in the memory.
+          title: Includes
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        excludes:
+          description: String to exclude the specific preferences in the memory.
+          title: Excludes
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        infer:
+          description: Whether to infer the memories or directly store the messages.
+          title: Infer
+          type: boolean
+          default: true
+        output_format:
+          description: 'Controls the response format structure. `v1.0` (default) returns a direct array of memory objects: `[{...}, {...}]`. `v1.1` returns an object with a ''results'' key containing the array: `{"results": [...]}`.'
+          title: Output format
+          type:
+          - string
+          - 'null'
+          default: v1.0
+        custom_categories:
+          description: A list of categories with category name and its description.
+          title: Custom categories
+          type:
+          - object
+          - 'null'
+          properties: {}
+        custom_instructions:
+          description: Defines project-specific guidelines for handling and organizing memories. When set at the project level, they apply to all new memories in that project.
+          title: Custom instructions
+          type:
+          - string
+          - 'null'
+        agent_custom_instructions:
+          description: Extraction instructions that apply only to agent-scoped memories. Used when `agent_id` is sent without `user_id`; when both are sent it governs the assistant-attributed memories while `custom_instructions` governs the rest. Falls back to `custom_instructions` when unset.
+          title: Agent custom instructions
+          type:
+          - string
+          - 'null'
+        immutable:
+          description: Whether the memory is immutable.
+          title: Immutable
+          type: boolean
+          default: false
+        async_mode:
+          description: Whether to add the memory completely asynchronously.
+          title: Async mode
+          type: boolean
+          default: true
+        timestamp:
+          description: 'The timestamp of the memory. Format: Unix timestamp'
+          title: Timestamp
+          type:
+          - integer
+          - 'null'
+        expiration_date:
+          description: 'The date when the memory will expire. Format: YYYY-MM-DD'
+          title: Expiration date
+          type:
+          - string
+          - 'null'
+          format: date
+        org_id:
+          description: The unique identifier of the organization associated with this memory.
+          title: Organization id
+          type:
+          - string
+          - 'null'
+        project_id:
+          description: The unique identifier of the project associated with this memory.
+          title: Project id
+          type:
+          - string
+          - 'null'
+        version:
+          description: The version of the memory to use. The default version is v1, which is deprecated. We recommend using v2 for new applications.
+          title: Version
+          type:
+          - string
+          - 'null'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

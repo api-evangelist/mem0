@@ -34,16 +34,7 @@ paths:
                   description: Schema definition for the export
                 filters:
                   type: object
-                  properties:
-                    user_id:
-                      type: string
-                    agent_id:
-                      type: string
-                    app_id:
-                      type: string
-                    run_id:
-                      type: string
-                  description: 'Filters to apply while exporting memories. Available fields are: user_id, agent_id, app_id, run_id.'
+                  description: 'Filters to apply while exporting memories, using the structured AND/OR filter format (see `/v2/memories/search/`), e.g. `{"AND": [{"user_id": "<user_id>"}]}`. Available fields are: user_id, agent_id, app_id, run_id. Flat filter objects (e.g. `{"user_id": "<user_id>"}`) are rejected with a 400 error.'
                 org_id:
                   type: string
                   description: Filter exports by organization ID.
@@ -74,11 +65,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Schema is required and must be a valid object
+                oneOf:
+                - type: object
+                  description: Returned when the schema is missing or invalid.
+                  properties:
+                    message:
+                      type: string
+                      example: Schema is required and must be a valid object
+                - type: object
+                  description: Returned when filters are missing or not in the required structured AND/OR format.
+                  properties:
+                    error:
+                      type: string
+                      example: 'One of the filters: app_id, user_id, agent_id, run_id, memory_export_id is required!'
       x-code-samples:
       - lang: Python
         source: "# To use the Python SDK, install the package:\n# pip install mem0ai\n\nfrom mem0 import MemoryClient\n\nclient = MemoryClient(api_key=\"your_api_key\")\n\njson_schema = {pydantic_json_schema}\nfilters = {\n    \"AND\": [\n        {\"user_id\": \"alex\"}\n    ]\n}\n\nresponse = client.create_memory_export(\n    schema=json_schema,\n    filters=filters\n)\nprint(response)"
@@ -92,7 +91,7 @@ paths:
         source: "<?php\n\n$curl = curl_init();\n\n$filters = [\n  'AND' => [\n    ['user_id' => 'alex']\n  ]\n];\n\n$data = array(\n  \"schema\" => array(), // Your schema here\n  \"filters\" => $filters\n);\n\ncurl_setopt_array($curl, [\n  CURLOPT_URL => \"https://api.mem0.ai/v1/exports/\",\n  CURLOPT_RETURNTRANSFER => true,\n  CURLOPT_ENCODING => \"\",\n  CURLOPT_MAXREDIRS => 10,\n  CURLOPT_TIMEOUT => 30,\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n  CURLOPT_CUSTOMREQUEST => \"POST\",\n  CURLOPT_POSTFIELDS => json_encode($data),\n  CURLOPT_HTTPHEADER => [\n    \"Authorization: Token <api-key>\",\n    \"Content-Type: application/json\"\n  ],\n]);\n\n$response = curl_exec($curl);\n$err = curl_error($curl);\n\ncurl_close($curl);\n\nif ($err) {\n  echo \"cURL Error #:\" . $err;\n} else {\n  echo $response;\n}"
       - lang: Java
         source: "import com.mashape.unirest.http.HttpResponse;\nimport com.mashape.unirest.http.JsonNode;\nimport com.mashape.unirest.http.Unirest;\nimport org.json.JSONObject;\nimport org.json.JSONArray;\n\nJSONObject filters = new JSONObject()\n    .put(\"AND\", new JSONArray()\n        .put(new JSONObject().put(\"user_id\", \"alex\")));\n\nJSONObject data = new JSONObject()\n    .put(\"schema\", new JSONObject()) // Your schema here\n    .put(\"filters\", filters);\n\nHttpResponse<JsonNode> response = Unirest.post(\"https://api.mem0.ai/v1/exports/\")\n  .header(\"Authorization\", \"Token <api-key>\")\n  .header(\"Content-Type\", \"application/json\")\n  .body(data.toString())\n  .asJson();"
-  /v1/exports/get:
+  /v1/exports/get/:
     post:
       tags:
       - Exports

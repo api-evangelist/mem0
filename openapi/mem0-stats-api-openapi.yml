@@ -30,7 +30,71 @@ paths:
       responses:
         '200':
           description: Successfully retrieved statistics.
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_memories:
+                    type: integer
+                  total_retrieval_events:
+                    type: integer
+                  total_add_events:
+                    type: integer
+                  total_api_retrieval_events:
+                    type: integer
+                  total_retrieval_events_limit:
+                    type: integer
+                  total_users_with_memories:
+                    type: integer
+                  total_agents_with_memories:
+                    type: integer
+                  total_runs_with_memories:
+                    type: integer
+                  memories_per_user:
+                    type: integer
+                  memories_per_agent:
+                    type: integer
+                  memories_per_run:
+                    type: integer
+  /v1/ping/:
+    get:
+      tags:
+      - Stats
+      summary: Check API key validity and resolve organization/project context
+      description: Both the Python and TypeScript SDKs call this endpoint on client construction to validate the API key and resolve the default `org_id` and `project_id`.
+      operationId: ping_read
+      responses:
+        '200':
+          description: The API key is valid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  org_id:
+                    type: string
+                  project_id:
+                    type: string
+                  user_email:
+                    type: string
+                    format: email
+        '401':
+          description: Invalid API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Invalid API key. You can find your API key on https://app.mem0.ai/dashboard/api-keys.
+      x-code-samples:
+      - lang: cURL
+        source: "curl --request GET \\\n  --url https://api.mem0.ai/v1/ping/ \\\n  --header 'Authorization: Token <api-key>'"
 components:
   securitySchemes:
     ApiKeyAuth:

@@ -187,6 +187,16 @@ paths:
                   latency:
                     type: number
                     description: Processing time in milliseconds.
+                  graph_status:
+                    type:
+                    - string
+                    - 'null'
+                    description: Status of graph memory processing for this event, if graph memory is enabled.
+                  error:
+                    type:
+                    - string
+                    - 'null'
+                    description: Error message if the event failed to process.
         '404':
           description: Event not found.
           content:
@@ -194,8 +204,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  detail:
+                  error:
                     type: string
+                    example: Event not found or you don't have permission to access it.
       x-code-samples:
       - lang: Python
         source: 'import requests

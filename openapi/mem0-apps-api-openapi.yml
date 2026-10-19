@@ -32,7 +32,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateApp'
+                $ref: '#/components/schemas/AppResponse'
       x-codegen-request-body-name: data
       summary: Apps create
       x-summary-source: derived
@@ -41,6 +41,7 @@ components:
     CreateApp:
       required:
       - app_id
+      - name
       type: object
       properties:
         app_id:
@@ -55,6 +56,42 @@ components:
           title: Metadata
           type: object
           properties: {}
+    AppResponse:
+      type: object
+      description: Response returned after creating an App.
+      properties:
+        id:
+          title: Id
+          type: integer
+          description: Internal numeric identifier.
+        app_id:
+          title: App id
+          type: string
+        name:
+          title: Name
+          type: string
+        metadata:
+          title: Metadata
+          type: object
+          properties: {}
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+        graph_entities:
+          title: Graph entities
+          description: Graph entities linked to this record, if any.
+        is_deleted:
+          title: Is deleted
+          type: boolean
+        project:
+          title: Project
+          type: integer
+          description: Internal numeric identifier of the project this record belongs to.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

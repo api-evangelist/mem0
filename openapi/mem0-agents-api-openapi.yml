@@ -32,15 +32,52 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateAgent'
+                $ref: '#/components/schemas/AgentResponse'
       x-codegen-request-body-name: data
       summary: Agents create
       x-summary-source: derived
 components:
   schemas:
+    AgentResponse:
+      type: object
+      description: Response returned after creating an Agent.
+      properties:
+        id:
+          title: Id
+          type: integer
+          description: Internal numeric identifier.
+        agent_id:
+          title: Agent id
+          type: string
+        name:
+          title: Name
+          type: string
+        metadata:
+          title: Metadata
+          type: object
+          properties: {}
+        created_at:
+          title: Created at
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated at
+          type: string
+          format: date-time
+        graph_entities:
+          title: Graph entities
+          description: Graph entities linked to this record, if any.
+        is_deleted:
+          title: Is deleted
+          type: boolean
+        project:
+          title: Project
+          type: integer
+          description: Internal numeric identifier of the project this record belongs to.
     CreateAgent:
       required:
       - agent_id
+      - name
       type: object
       properties:
         agent_id:
