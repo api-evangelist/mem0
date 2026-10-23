@@ -91,3 +91,9 @@ components:
       name: Authorization
       description: 'API key authentication. Prefix your Mem0 API key with ''Token ''. Example: ''Token your_api_key'''
 x-original-swagger-version: '2.0'
+x-provenance:
+  method: harvested
+  publisher: Mem0
+  source: https://docs.mem0.ai/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
